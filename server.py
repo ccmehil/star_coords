@@ -26,10 +26,11 @@ if not os.path.isfile(config_file):
     print("Using default settings")
     h = open("server.ini", "w")
     #Default to Greenwich as the site, 1 as tz
-    h.write("[site]\naddress=Greenwich\n")
-    h.write("[site]\ntz=1\n")
-    h.write("[site]\nlatitude=51.6712\n")
-    h.write("[site]\nlongitude=8.3406\n")
+    h.write("[site]\n")
+    h.write("\naddress=Greenwich\n")
+    h.write("\ntz=1\n")
+    h.write("\nlatitude=51.6712\n")
+    h.write("\nlongitude=8.3406\n")
     h.close()
 
 config = configparser.ConfigParser()
