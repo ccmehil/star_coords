@@ -56,5 +56,5 @@ debug_info("Location %r" % location)
 
 skyobject = SkyCoord.from_name('M39')
 skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-print("Altitude = %s" % skyobjectaltaz.alt)
-print("Az = %s" % skyobjectaltaz.az)
+print("Turn Base to = %s" % skyobjectaltaz.az)
+print("Raise/Lower Scope to = %s" % skyobjectaltaz.alt)
