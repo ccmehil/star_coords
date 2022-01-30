@@ -27,9 +27,9 @@ if not os.path.isfile(config_file):
     h = open("server.ini", "w")
     #Default to Greenwich as the site, 1 as tz
     h.write("[site]\n")
-    h.write("\naddress=Greenwich\n")
-    h.write("\nlatitude=51.6712\n")
-    h.write("\nlongitude=8.3406\n")
+    h.write("\naddress=Greenwich")
+    h.write("\nlatitude=51.4874277")
+    h.write("\nlongitude=-0.012965")
     h.close()
 
 config = configparser.ConfigParser()
@@ -37,8 +37,8 @@ config.read("server.ini")
 #server_name = config.get("server", "name") #e.g. 10.0.0.1
 #server_port = config.getint("server", "port") #e.g. 4030
 site_address = config.get("site", "address") #e.g. Greenwich
-site_latitude = config.get("site", "latitude") #e.g. 51.4176
-site_longitude = config.get("site", "longitude") #e.g. 8.1923
+site_latitude = config.get("site", "latitude") #e.g. 51.4874277
+site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
 # Debug statements in each function start with 'FUNCTION xxxxx' 
 # or simply with ' ' to display all 
