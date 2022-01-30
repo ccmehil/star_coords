@@ -72,7 +72,7 @@ utcoffset = -4*u.hour  # Eastern Daylight Time
 time = Time('2012-7-12 23:00:00') - utcoffset
 print(time)
 print("\n")
-print(datetime.utcnow())
+print(dt.utcnow())
 
 
 '''m33 = SkyCoord.from_name('M33')
