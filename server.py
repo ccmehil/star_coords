@@ -53,23 +53,20 @@ def debug_info(str):
 
 def main(argv):
     global location
+    argumentList = sys.argv[1:]
+    options = "hm:"
+    long_options = ["Help", "Messier_Object"]    
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help'])
-    except getopt.GetoptError:
-        sys.stdout.write("server.py -m <messierobject>\n")
-        sys.exit(2)
-
-    for opt, arg in opts:
-        if opt in ('-h', '--help'):
-            sys.stdout.write("server.py -m <messierobject>\n")
-            sys.exit()
-        elif opt in ('-m', '--messier_object'):
-            debug_info("Object from the Messier Catalog is %s" % arg)
-            return arg
-
-    if len(args) != 1:
-        sys.stdout.write("Object from the Messier Catalog is required\n")
-        sys.exit()
+        arguments, values = getopt.getopt(argumentList, options, long_options)
+        for currentArgument, currentValue in arguments:    
+            if currentArgument in ("-h", "--Help"):
+                print("Displaying Help\n")
+                print("server.py -m <messierobject>\n")               
+            elif currentArgument in ("-m", "--Messier_Object"):
+                print("Displaying Messier Object:", sys.argv[0])
+                return sys.argv[0]    
+    except getopt.error as err:
+        print(str(err))
 
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
