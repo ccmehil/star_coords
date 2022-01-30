@@ -82,4 +82,5 @@ if __name__ == "__main__":
     alt = skyobjectaltaz.alt.to_string()
     sys.stdout.write("\nTurn Base to = %s" % az.rpartition('d')[0])
     sys.stdout.write("\nRaise/Lower Scope to = %s" % alt.rpartition('d')[0])
+    sys.stdout.write("\n")
 
