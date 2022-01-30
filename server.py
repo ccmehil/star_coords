@@ -64,13 +64,7 @@ def obs_time():
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
-obs = obs_time()
-print(obs)
-time = dt.utcnow()
-print("\n")
-print(time)
-
-skyobject = SkyCoord.from_name('M31')
-skyobjectaltaz = skyobject.transform_to(AltAz(obstime=time,location=location))
+skyobject = SkyCoord.from_name('M39')
+skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
 print("Altitude = %s" % skyobjectaltaz.alt)
 print("Az = %s" % skyobjectaltaz.az)
