@@ -70,12 +70,6 @@ time = dt.utcnow()
 print("\n")
 print(time)
 
-m33 = SkyCoord.from_name('M33')
-m33altaz = m33.transform_to(AltAz(obstime=time,location=location))
-print(f"M33's Altitude = {m33altaz.alt:.2}")
-
-'''
-print(m33altaz)
-print("\n")
-print(m33altaz.az[0].radian)
-'''
+skyobject = SkyCoord.from_name('M31')
+skyobjectaltaz = skyobject.transform_to(AltAz(obstime=time,location=location))
+print(f"M33's Altitude = {skyobjectaltaz.alt:.2}")
