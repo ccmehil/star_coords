@@ -64,8 +64,8 @@ def main(argv):
                 print("server.py -m <messierobject>\n")
                 sys.exit()          
             elif currentArgument in ("-m", "--Messier_Object"):
-                print("Displaying Messier Object:", sys.argv[0])
-                return sys.argv[0]    
+                print("Displaying Messier Object:", sys.argv[1])
+                return sys.argv[1]    
     except getopt.error as err:
         print(str(err))
         sys.exit()
