@@ -67,7 +67,7 @@ debug_info("Location %r" % location)
 
 bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
 utcoffset = -4*u.hour  # Eastern Daylight Time
-time = Time('2022-1-30 23:00:00') - utcoffset
+time = Time('2012-7-12 23:00:00') - utcoffset
 
 m33 = SkyCoord.from_name('M33')
 m33altaz = m33.transform_to(AltAz(obstime=obs,location=location))
