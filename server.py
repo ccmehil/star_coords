@@ -43,7 +43,7 @@ site_longitude = config.get("site", "longitude") #e.g. -0.012965
 # Debug statements in each function start with 'FUNCTION xxxxx' 
 # or simply with ' ' to display all 
 debug = True
-debug_function = ' '
+debug_function = 'none'
 
 def debug_info(str):
     if debug:
