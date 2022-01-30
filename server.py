@@ -54,15 +54,20 @@ def debug_info(str):
 def main(argv):
     global location
     try:
-        opts, args = getopt.getopt(argv,"hi:m:",["mobject="])
+        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help'])
     except getopt.GetoptError:
         sys.stdout.write("server.py -m <messierobject>\n")
         sys.exit(2)
+
+    if len(args) != 1:
+        sys.stdout.write("Object from the Messier Catalog is required")
+        sys.exit()
+        
     for opt, arg in opts:
-        if opt == '-h':
+        if opt in ('-h', '--help'):
             sys.stdout.write("server.py -m <messierobject>\n")
             sys.exit()
-        elif opt in ("-m", "--mobject"):
+        elif opt in ("-m"):
             debug_info("Object from the Messier Catalog is %s" % arg)
             return arg
 
