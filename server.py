@@ -56,11 +56,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"hi:m:",["mobject="])
     except getopt.GetoptError:
-        print("server.py -m <messierobject>")
+        sys.stdout.write("server.py -m <messierobject>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print("server.py -m <messierobject>")
+            sys.stdout.write("server.py -m <messierobject>")
             sys.exit()
         elif opt in ("-m", "--mobject"):
             debug_info("Object from the Messier Catalog is %s" % arg)
@@ -68,12 +68,14 @@ def main(argv):
             skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
             az = skyobjectaltaz.az.to_string()
             alt = skyobjectaltaz.alt.to_string()
-            sys.stdout.write("Turn Base to = %s" % az.rpartition('d')[0])
-            sys.stdout.write("Raise/Lower Scope to = %s" % alt.rpartition('d')[0])
+            return az, alt
 
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   az, alt = main(sys.argv[1:])
+
+sys.stdout.write("\nTurn Base to = %s" % az.rpartition('d')[0])
+sys.stdout.write("\nRaise/Lower Scope to = %s" % alt.rpartition('d')[0])
