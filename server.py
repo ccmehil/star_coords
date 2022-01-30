@@ -59,10 +59,6 @@ def main(argv):
         sys.stdout.write("server.py -m <messierobject>\n")
         sys.exit(2)
 
-    if len(args) != 1:
-        sys.stdout.write("Object from the Messier Catalog is required\n")
-        sys.exit()
-
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             sys.stdout.write("server.py -m <messierobject>\n")
@@ -70,6 +66,10 @@ def main(argv):
         elif opt in ("-m"):
             debug_info("Object from the Messier Catalog is %s" % arg)
             return arg
+
+    if len(args) != 1:
+        sys.stdout.write("Object from the Messier Catalog is required\n")
+        sys.exit()
 
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
