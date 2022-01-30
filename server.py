@@ -64,18 +64,18 @@ def main(argv):
             sys.exit()
         elif opt in ("-m", "--mobject"):
             debug_info("Object from the Messier Catalog is %s" % arg)
-            skyobject = SkyCoord.from_name(arg)
-            skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-            az = skyobjectaltaz.az.to_string()
-            alt = skyobjectaltaz.alt.to_string()
-            return az, alt
+            return arg
 
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
 if __name__ == "__main__":
-   az, alt = main(sys.argv[1:])
+    arg = main(sys.argv[1:])
+    skyobject = SkyCoord.from_name(arg)
+    skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+    az = skyobjectaltaz.az.to_string()
+    alt = skyobjectaltaz.alt.to_string()
+    sys.stdout.write("\nTurn Base to = %s" % az.rpartition('d')[0])
+    sys.stdout.write("\nRaise/Lower Scope to = %s" % alt.rpartition('d')[0])
 
-sys.stdout.write("\nTurn Base to = %s" % az.rpartition('d')[0])
-sys.stdout.write("\nRaise/Lower Scope to = %s" % alt.rpartition('d')[0])
