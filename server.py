@@ -6,6 +6,7 @@ Craig Cmehil - https://github.com/ccmehil
 
 import os
 import sys
+import getopt
 import subprocess
 import time
 import datetime
@@ -50,13 +51,29 @@ def debug_info(str):
         if debug_function in str:
             sys.stdout.write("%s\n" % str)
 
+def main(argv):
+    global location
+    try:
+        opts, args = getopt.getopt(argv,"hi:m:",["mobject="])
+    except getopt.GetoptError:
+        print("server.py -m <messierobject>")
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print("server.py -m <messierobject>")
+            sys.exit()
+        elif opt in ("-m", "--mobject"):
+            debug_info("Object from the Messier Catalog is %s" % arg)
+            skyobject = SkyCoord.from_name(arg)
+            skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+            az = skyobjectaltaz.az.to_string()
+            alt = skyobjectaltaz.alt.to_string()
+            sys.stdout.write("Turn Base to = %s" % az.rpartition('d')[0])
+            sys.stdout.write("Raise/Lower Scope to = %s" % alt.rpartition('d')[0])
+
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
-skyobject = SkyCoord.from_name('M39')
-skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-az = skyobjectaltaz.az.to_string()
-alt = skyobjectaltaz.alt.to_string()
-print("Turn Base to = %s" % az.rpartition('d')[0])
-print("Raise/Lower Scope to = %s" % alt.rpartition('d')[0])
+if __name__ == "__main__":
+   main(sys.argv[1:])
