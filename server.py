@@ -55,7 +55,7 @@ def main(argv):
     global location
     argumentList = sys.argv[1:]
     options = "hm:"
-    long_options = ["Help", "Messier_Object"]    
+    long_options = ["Help", "Messier_Object ="]    
     try:
         arguments, values = getopt.getopt(argumentList, options, long_options)
         for currentArgument, currentValue in arguments:    
@@ -64,8 +64,8 @@ def main(argv):
                 print("server.py -m <messierobject>\n")
                 sys.exit()          
             elif currentArgument in ("-m", "--Messier_Object"):
-                print("Displaying Messier Object:", sys.argv[1])
-                return sys.argv[1]    
+                print("Displaying Messier Object:", currentValue)
+                return currentValue    
     except getopt.error as err:
         print(str(err))
         sys.exit()
