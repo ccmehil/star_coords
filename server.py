@@ -61,12 +61,14 @@ def main(argv):
         for currentArgument, currentValue in arguments:    
             if currentArgument in ("-h", "--Help"):
                 print("Displaying Help\n")
-                print("server.py -m <messierobject>\n")               
+                print("server.py -m <messierobject>\n")
+                sys.exit()          
             elif currentArgument in ("-m", "--Messier_Object"):
                 print("Displaying Messier Object:", sys.argv[0])
                 return sys.argv[0]    
     except getopt.error as err:
         print(str(err))
+        sys.exit()
 
 #Set local site (AltAz)
 location = EarthLocation.of_address(site_address)
