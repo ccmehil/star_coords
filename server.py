@@ -63,7 +63,7 @@ def main(argv):
         if opt in ('-h', '--help'):
             sys.stdout.write("server.py -m <messierobject>\n")
             sys.exit()
-        elif opt in ('-m'):
+        elif opt in ('-m', '--messier_object'):
             debug_info("Object from the Messier Catalog is %s" % arg)
             return arg
 
