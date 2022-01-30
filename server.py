@@ -61,22 +61,18 @@ def obs_time():
     return obstime
 
 #Set local site (AltAz)
-obs = obs_time()
+#obs = obs_time()
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
-bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
-debug_info("Bear Mountain %r" % bear_mountain)
+time = dt.utcnow()
 
-print(dt.utcnow())
-
-
-'''m33 = SkyCoord.from_name('M33')
-m33altaz = m33.transform_to(AltAz(obstime=obs,location=location))
-m33altaz = m33.transform_to(AltAz(obstime=time,location=bear_mountain))
+m33 = SkyCoord.from_name('M33')
+m33altaz = m33.transform_to(AltAz(obstime=time,location=location))
 print(f"M33's Altitude = {m33altaz.alt:.2}")
+
 '''
-'''print(m33altaz)
+print(m33altaz)
 print("\n")
 print(m33altaz.az[0].radian)
 '''
