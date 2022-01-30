@@ -56,11 +56,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"hi:m:",["mobject="])
     except getopt.GetoptError:
-        sys.stdout.write("server.py -m <messierobject>")
+        sys.stdout.write("server.py -m <messierobject>\n")
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            sys.stdout.write("server.py -m <messierobject>")
+            sys.stdout.write("server.py -m <messierobject>\n")
             sys.exit()
         elif opt in ("-m", "--mobject"):
             debug_info("Object from the Messier Catalog is %s" % arg)
