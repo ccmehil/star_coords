@@ -67,5 +67,6 @@ debug_info("Location %r" % location)
 
 m33 = SkyCoord.from_name('M33')
 m33altaz = m33.transform_to(AltAz(obstime=obs,location=location))
-print(f"M33's Altitude = {m33altaz.alt:.2}")
-print(f"M33's Az = {m33altaz.az:.2}")
+print(m33altaz)
+#print(f"M33's Altitude = {m33altaz.alt:.2}")
+#print(f"M33's Az = {m33altaz.az:.2}")
