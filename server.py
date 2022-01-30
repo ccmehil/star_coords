@@ -35,8 +35,8 @@ if not os.path.isfile(config_file):
 
 config = configparser.ConfigParser()
 config.read("server.ini")
-server_name = config.get("server", "name") #e.g. 10.0.0.1
-server_port = config.getint("server", "port") #e.g. 4030
+#server_name = config.get("server", "name") #e.g. 10.0.0.1
+#server_port = config.getint("server", "port") #e.g. 4030
 site_address = config.get("site", "address") #e.g. Greenwich
 site_tz = config.get("site", "tz") #e.g. 1
 site_latitude = config.get("site", "latitude") #e.g. 51.4176
