@@ -66,12 +66,8 @@ location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
 bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
-debug_info("Bear Mountain %r" % location)
+debug_info("Bear Mountain %r" % bear_mountain)
 
-utcoffset = -4*u.hour  # Eastern Daylight Time
-time = Time('2012-7-12 23:00:00') - utcoffset
-print(time)
-print("\n")
 print(dt.utcnow())
 
 
