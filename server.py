@@ -65,8 +65,16 @@ obs = obs_time()
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
+bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
+utcoffset = -4*u.hour  # Eastern Daylight Time
+time = Time('2022-1-30 23:00:00') - utcoffset
+
 m33 = SkyCoord.from_name('M33')
 m33altaz = m33.transform_to(AltAz(obstime=obs,location=location))
-print(m33altaz)
+m33altaz = m33.transform_to(AltAz(obstime=time,location=bear_mountain))
+print(f"M33's Altitude = {m33altaz.alt:.2}")
+
+'''print(m33altaz)
 print("\n")
 print(m33altaz.az[0].radian)
+'''
