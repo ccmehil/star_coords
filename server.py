@@ -61,11 +61,14 @@ def obs_time():
     return obstime
 
 #Set local site (AltAz)
-#obs = obs_time()
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
+obs = obs_time()
+print(obs)
 time = dt.utcnow()
+print("\n")
+print(time)
 
 m33 = SkyCoord.from_name('M33')
 m33altaz = m33.transform_to(AltAz(obstime=time,location=location))
