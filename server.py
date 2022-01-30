@@ -72,4 +72,5 @@ print(time)
 
 skyobject = SkyCoord.from_name('M31')
 skyobjectaltaz = skyobject.transform_to(AltAz(obstime=time,location=location))
-print("Altitude = %s" % skyobjectaltaz.alt)
+print(f"Altitude = %s" % skyobjectaltaz.alt:.2)
+print(f"Az = %s" % skyobjectaltaz.az:.2)
