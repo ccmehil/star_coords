@@ -60,9 +60,9 @@ def main(argv):
         sys.exit(2)
 
     if len(args) != 1:
-        sys.stdout.write("Object from the Messier Catalog is required")
+        sys.stdout.write("Object from the Messier Catalog is required\n")
         sys.exit()
-        
+
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             sys.stdout.write("server.py -m <messierobject>\n")
