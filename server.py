@@ -5,6 +5,7 @@ Craig Cmehil - https://github.com/ccmehil
 """
 
 import os
+from pickle import TRUE
 import sys
 import getopt
 import subprocess
@@ -56,9 +57,13 @@ site_address = config.get("site", "address") #e.g. Greenwich
 site_latitude = config.get("site", "latitude") #e.g. 51.4874277
 site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
+# Use OLED?
+oled_active = TRUE
+
 #Connect oled type is sh1106
-serial = i2c(port=4, address=0x3C)
-device = sh1106(serial)
+if oled_active:
+    serial = i2c(port=4, address=0x3C)
+    device = sh1106(serial)
 
 # HTTP Server
 class SimpleWebServer(BaseHTTPRequestHandler):
@@ -82,12 +87,13 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         az = skyobjectaltaz.az.to_string()
         alt = skyobjectaltaz.alt.to_string()    
         # Output to OLED
-        with canvas(device) as draw:
-            draw.rectangle(device.bounding_box, outline="white", fill="black")
-            draw.text((3, 10), "  Star Coords - %s  " % messier[0].upper(), fill="white")
-            draw.text((3, 20), "--------------------", fill="white")
-            draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
-            draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
+        if oled_active:
+            with canvas(device) as draw:
+                draw.rectangle(device.bounding_box, outline="white", fill="black")
+                draw.text((3, 10), "  Star Coords - %s  " % messier[0].upper(), fill="white")
+                draw.text((3, 20), "--------------------", fill="white")
+                draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
+                draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
         # Output to HTTP Request
         str = "Star Coords - %s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])        
         return bytes(str, "UTF-8")
