@@ -76,10 +76,11 @@ class SimpleWeb(BaseHTTPRequestHandler):
         mobject = parse_qs(query).get('messier', None)
         debug_info("FUNCTION do_GET: mobject - %r" % mobject)
 
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
 '''        if mobject:
-            self.send_response(200)
-            self.send_header("Content-type", "text/html")
-            self.end_headers()
             # get Coords of Sky Object
             skyobject = SkyCoord.from_name(mobject)
             skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
@@ -115,7 +116,7 @@ if __name__ == "__main__":
 
     # Start Web server
     webServer = HTTPServer((server_name, server_port), SimpleWeb)
-    sys.stdout.write("Star Coords server started http://%s:%s" % (server_name, server_port))
+    debug_info("Star Coords server started http://%s:%s" % (server_name, server_port))
 
     try:
         webServer.serve_forever()
@@ -123,4 +124,4 @@ if __name__ == "__main__":
         pass
 
     webServer.server_close()
-    sys.stdout.write("Server stopped")
+    debug_info("Server stopped")
