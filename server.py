@@ -70,10 +70,6 @@ def debug_info(str):
         if debug_function in str:
             sys.stdout.write("%s\n" % str)
 
-#Set local site (AltAz)
-location = EarthLocation.of_address(site_address)
-debug_info("Location %r" % location)
-
 # HTTP Server
 class SimpleWeb(BaseHTTPRequestHandler):
     def debug_info(str):
@@ -119,6 +115,10 @@ class SimpleWeb(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     try:
+        #Set local site (AltAz)
+        location = EarthLocation.of_address(site_address)
+        debug_info("Location %r" % location)
+
         # Start Web server
         debug_info("Star Coords server started http://%s:%s" % (server_name, server_port))
         webServer = HTTPServer((server_name, server_port), SimpleWeb)
