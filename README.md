@@ -20,6 +20,10 @@ To use the server once it is running you will need to make an HTTP request.
 
 The IP address of course is whatever that of your Raspberry Pi is and the parameter "messier=XXX" is a object from the [Messier Catalog](https://en.wikipedia.org/wiki/Messier_object).
 
+# To Do
+
+Incorporate other objects than just those of the Messier Catalog, such as the planets.
+
 # Hardware
 
 ![Example Running](IMG_0931.jpg "Live")
