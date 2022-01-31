@@ -69,35 +69,33 @@ class SimpleWeb(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
+
+        skyobject = SkyCoord.from_name(self.path)
+        skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+        az = skyobjectaltaz.az.to_string()
+        alt = skyobjectaltaz.alt.to_string()    
+        # Output to OLED
+        with canvas(device) as draw:
+            draw.rectangle(device.bounding_box, outline="white", fill="black")
+            draw.text((3, 10), "    Star Coords     ", fill="white")
+            draw.text((3, 20), "--------------------", fill="white")
+            draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
+            draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
+        # Output to HTTP Request
         self.wfile.write(bytes("<html><head><title>Star Coords</title></head>", "utf-8"))
         self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
         self.wfile.write(bytes("<body>", "utf-8"))
-        self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
+        self.wfile.write(bytes("    Star Coords     ", "utf-8"))
+        self.wfile.write(bytes("--------------------", "utf-8"))
+        self.wfile.write(bytes("   Base: = %s" % az.rpartition('d')[0], "utf-8"))        
+        self.wfile.write(bytes("  Scope: = %s" % alt.rpartition('d')[0], "utf-8"))
         self.wfile.write(bytes("</body></html>", "utf-8"))
+    
 
 def debug_info(str):
     if debug:
         if debug_function in str:
             sys.stdout.write("%s\n" % str)
-
-def main(argv):
-    global location
-    argumentList = sys.argv[1:]
-    options = "hm:"
-    long_options = ["Help", "Messier_Object ="]    
-    try:
-        arguments, values = getopt.getopt(argumentList, options, long_options)
-        for currentArgument, currentValue in arguments:    
-            if currentArgument in ("-h", "--Help"):
-                sys.stdout.write("Displaying Help\n")
-                sys.stdout.write("server.py -m <messierobject>\n")
-                sys.exit()          
-            elif currentArgument in ("-m", "--Messier_Object"):
-                sys.stdout.write("Displaying Messier Object:", currentValue)
-                return currentValue    
-    except getopt.error as err:
-        sys.stdout.write(str(err))
-        sys.exit()
 
 if __name__ == "__main__":
     #Set local site (AltAz)
@@ -110,17 +108,6 @@ if __name__ == "__main__":
 
     try:
         webServer.serve_forever()
-        arg = main(sys.argv[1:])
-        skyobject = SkyCoord.from_name(arg)
-        skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-        az = skyobjectaltaz.az.to_string()
-        alt = skyobjectaltaz.alt.to_string()    
-        with canvas(device) as draw:
-            draw.rectangle(device.bounding_box, outline="white", fill="black")
-            draw.text((3, 10), "    Star Coords     ", fill="white")
-            draw.text((3, 20), "--------------------", fill="white")
-            draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
-            draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
     except KeyboardInterrupt:
         pass
 
