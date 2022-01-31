@@ -95,7 +95,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
                 draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
         # Output to HTTP Request
-        str = "Star Coords - %s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])        
+        str = "%s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])        
         return bytes(str, "UTF-8")
         
     def respond(self):
