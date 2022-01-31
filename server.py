@@ -10,11 +10,14 @@ import getopt
 import subprocess
 import time
 import datetime
-import numpy as np
 from datetime import datetime as dt
+from time import sleep
+# Astro
+import numpy as np
 import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
+# oled Display
 from luma.core.interface.serial import i2c, spi, pcf8574
 from luma.core.interface.parallel import bitbang_6800
 from luma.core.render import canvas
@@ -94,3 +97,4 @@ if __name__ == "__main__":
         draw.text((30, 40), "------------------", fill="white")
         draw.text((30, 40), "Turn Base to = %s" % az.rpartition('d')[0], fill="white")        
         draw.text((30, 40), "Raise/Lower Scope to = %s" % alt.rpartition('d')[0], fill="white")
+    sleep(10)
