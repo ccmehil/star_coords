@@ -75,32 +75,22 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 
         query = urlparse(self.path).query
         messier = parse_qs(query).get('messier', None)
-        print("FUNCTION do_GET: messier - %r" % messier[0])
-        '''
-            # get Coords of Sky Object
-            skyobject = SkyCoord.from_name(mobject)
-            skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-            az = skyobjectaltaz.az.to_string()
-            alt = skyobjectaltaz.alt.to_string()    
-            # Output to OLED
-            with canvas(device) as draw:
-                draw.rectangle(device.bounding_box, outline="white", fill="black")
-                draw.text((3, 10), "    Star Coords     ", fill="white")
-                draw.text((3, 20), "--------------------", fill="white")
-                draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
-                draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
-            # Output to HTTP Request
-            self.wfile.write(bytes("<html><head><title>Star Coords</title></head>", "utf-8"))
-            self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
-            self.wfile.write(bytes("<body>", "utf-8"))
-            self.wfile.write(bytes("    Star Coords     ", "utf-8"))
-            self.wfile.write(bytes("--------------------", "utf-8"))
-            self.wfile.write(bytes("   Base: = %s" % az.rpartition('d')[0], "utf-8"))        
-            self.wfile.write(bytes("  Scope: = %s" % alt.rpartition('d')[0], "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))
-        '''
-
-        return bytes("Hello World", "UTF-8")
+        
+        # get Coords of Sky Object
+        skyobject = SkyCoord.from_name(messier[0])
+        skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+        az = skyobjectaltaz.az.to_string()
+        alt = skyobjectaltaz.alt.to_string()    
+        # Output to OLED
+        with canvas(device) as draw:
+            draw.rectangle(device.bounding_box, outline="white", fill="black")
+            draw.text((3, 10), "    Star Coords     ", fill="white")
+            draw.text((3, 20), "--------------------", fill="white")
+            draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
+            draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
+        # Output to HTTP Request
+        str = "    Star Coords     \n--------------------\n   Base: = %s\n  Scope: = %s" % (az.rpartition('d')[0],  alt.rpartition('d')[0])        
+        return bytes(str, "UTF-8")
         
     def respond(self):
         content = self.handle_http(200, 'text/html')
