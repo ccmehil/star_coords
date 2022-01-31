@@ -24,7 +24,7 @@ from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import urlparse
+from urllib.parse import urlparse
 
 try:
     import configparser
