@@ -24,7 +24,7 @@ from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urlparse import urlparse
+import urlparse
 
 try:
     import configparser
@@ -70,9 +70,7 @@ class SimpleWeb(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        query = urlparse(self.path).query
-        query_components = dict(qc.split("=") for qc in query.split("&"))
-        mobject = query_components["messier"]
+        mobject = urlparse.parse_qs(urlparse.urlparse(self.path).query).get('messier', None)
 
         skyobject = SkyCoord.from_name(mobject)
         skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
