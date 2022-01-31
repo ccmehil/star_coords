@@ -76,7 +76,7 @@ class SimpleWeb(BaseHTTPRequestHandler):
         mobject = parse_qs(query).get('messier', None)
         debug_info("FUNCTION do_GET: mobject - %r" % mobject)
 
-        if mobject:
+'''        if mobject:
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
@@ -100,7 +100,7 @@ class SimpleWeb(BaseHTTPRequestHandler):
             self.wfile.write(bytes("--------------------", "utf-8"))
             self.wfile.write(bytes("   Base: = %s" % az.rpartition('d')[0], "utf-8"))        
             self.wfile.write(bytes("  Scope: = %s" % alt.rpartition('d')[0], "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))
+            self.wfile.write(bytes("</body></html>", "utf-8"))'''
     
 
 def debug_info(str):
