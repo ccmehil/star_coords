@@ -79,7 +79,7 @@ location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
 #Connect oled
-serial = i2c(port=1, address=0x3C)
+serial = i2c(port=4, address=0x3C)
 device = ssd1306(serial)
 
 if __name__ == "__main__":
