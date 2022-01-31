@@ -93,8 +93,8 @@ if __name__ == "__main__":
     alt = skyobjectaltaz.alt.to_string()    
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="white", fill="black")
-        draw.text((10, 40), "Star Coords", fill="white")
-        draw.text((20, 40), "------------------", fill="white")
-        draw.text((30, 40), "Turn Base to = %s" % az.rpartition('d')[0], fill="white")        
-        draw.text((40, 40), "Raise/Lower Scope to = %s" % alt.rpartition('d')[0], fill="white")
+        draw.text((30, 10), "Star Coords", fill="white")
+        draw.text((30, 20), "------------------", fill="white")
+        draw.text((30, 30), "Turn Base to = %s" % az.rpartition('d')[0], fill="white")        
+        draw.text((30, 40), "Raise/Lower Scope to = %s" % alt.rpartition('d')[0], fill="white")
     sleep(30)
