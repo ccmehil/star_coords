@@ -70,7 +70,7 @@ class SimpleWeb(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        mobject = urlparse.parse_qs(urlparse.urlparse(self.path).query).get('messier', None)
+        mobject = urlparse.urlparse(self.path).query.get('messier', None)
 
         skyobject = SkyCoord.from_name(mobject)
         skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
