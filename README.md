@@ -12,6 +12,10 @@ My understanding is the the Alt is a degree point ona 360 degree circle where 0 
 
 # Usage
 
-> server.py -m M41
+> server.py
 
+# Hardware
 
+![Example Running](IMG_0931.jpg "Live")
+
+![Wiring](Raspberry_Pi_OLED_Display_128_64.jpg "RPi Wiring")
