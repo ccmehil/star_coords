@@ -65,8 +65,18 @@ debug_function = 'none'
 serial = i2c(port=4, address=0x3C)
 device = sh1106(serial)
 
+def debug_info(str):
+    if debug:
+        if debug_function in str:
+            sys.stdout.write("%s\n" % str)
+
 # HTTP Server
 class SimpleWeb(BaseHTTPRequestHandler):
+    def debug_info(str):
+        if debug:
+            if debug_function in str:
+                sys.stdout.write("%s\n" % str)
+
     def do_GET(self):        
         # Get parameter
         debug_info("FUNCTION do_GET: %r" % self)
@@ -102,12 +112,6 @@ class SimpleWeb(BaseHTTPRequestHandler):
             self.wfile.write(bytes("   Base: = %s" % az.rpartition('d')[0], "utf-8"))        
             self.wfile.write(bytes("  Scope: = %s" % alt.rpartition('d')[0], "utf-8"))
             self.wfile.write(bytes("</body></html>", "utf-8"))'''
-    
-
-def debug_info(str):
-    if debug:
-        if debug_function in str:
-            sys.stdout.write("%s\n" % str)
 
 if __name__ == "__main__":
     #Set local site (AltAz)
@@ -115,8 +119,8 @@ if __name__ == "__main__":
     debug_info("Location %r" % location)
 
     # Start Web server
-    webServer = HTTPServer((server_name, server_port), SimpleWeb)
     debug_info("Star Coords server started http://%s:%s" % (server_name, server_port))
+    webServer = HTTPServer((server_name, server_port), SimpleWeb)
 
     try:
         webServer.serve_forever()
