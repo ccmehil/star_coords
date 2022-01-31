@@ -72,33 +72,14 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
-        '''
-        query = urlparse(self).query
-        messier = parse_qs(query).get('messier', None)
-        print(messier)
-        '''
-        return bytes("Hello World", "UTF-8")
-        
-    def respond(self):
-        content = self.handle_http(200, 'text/html')
-        self.wfile.write(content)   
 
-    def do_GET(self):        
         print("FUNCTION do_GET: %r" % self)
         print("FUNCTION do_GET: %r" % self.path)
-        self.respond()
-
-'''        # Get parameter
         query = urlparse(self.path).query
         print("FUNCTION do_GET: query - %r" % query)
-        mobject = parse_qs(query).get('messier', None)
-        print("FUNCTION do_GET: mobject - %r" % mobject)
-
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-'''
-'''        if mobject:
+        messier = parse_qs(query).get('messier', None)
+        print("FUNCTION do_GET: messier - %r" % messier)
+        '''
             # get Coords of Sky Object
             skyobject = SkyCoord.from_name(mobject)
             skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
@@ -119,7 +100,17 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes("--------------------", "utf-8"))
             self.wfile.write(bytes("   Base: = %s" % az.rpartition('d')[0], "utf-8"))        
             self.wfile.write(bytes("  Scope: = %s" % alt.rpartition('d')[0], "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))'''
+            self.wfile.write(bytes("</body></html>", "utf-8"))
+        '''
+
+        return bytes("Hello World", "UTF-8")
+        
+    def respond(self):
+        content = self.handle_http(200, 'text/html')
+        self.wfile.write(content)   
+
+    def do_GET(self):        
+        self.respond()
 
 if __name__ == "__main__":
     #Set local site (AltAz)
