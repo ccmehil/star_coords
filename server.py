@@ -15,6 +15,10 @@ from datetime import datetime as dt
 import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
+from luma.core.interface.serial import i2c, spi, pcf8574
+from luma.core.interface.parallel import bitbang_6800
+from luma.core.render import canvas
+from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 
 try:
     import configparser
@@ -74,13 +78,19 @@ def main(argv):
 location = EarthLocation.of_address(site_address)
 debug_info("Location %r" % location)
 
+#Connect oled
+serial = i2c(port=1, address=0x3C)
+device = ssd1306(serial)
+
 if __name__ == "__main__":
     arg = main(sys.argv[1:])
     skyobject = SkyCoord.from_name(arg)
     skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
     az = skyobjectaltaz.az.to_string()
-    alt = skyobjectaltaz.alt.to_string()
-    sys.stdout.write("\nTurn Base to = %s" % az.rpartition('d')[0])
-    sys.stdout.write("\nRaise/Lower Scope to = %s" % alt.rpartition('d')[0])
-    sys.stdout.write("\n")
-
+    alt = skyobjectaltaz.alt.to_string()    
+    with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="white", fill="black")
+        draw.text((30, 40), "Star Coords", fill="white")
+        draw.text((30, 40), "------------------", fill="white")
+        draw.text((30, 40), "Turn Base to = %s" % az.rpartition('d')[0], fill="white")        
+        draw.text((30, 40), "Raise/Lower Scope to = %s" % alt.rpartition('d')[0], fill="white")
