@@ -24,6 +24,7 @@ from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from server import Server
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -56,40 +57,43 @@ site_address = config.get("site", "address") #e.g. Greenwich
 site_latitude = config.get("site", "latitude") #e.g. 51.4874277
 site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
-# Debug statements in each function start with 'FUNCTION xxxxx' 
-# or simply with ' ' to display all 
-debug = True
-debug_function = 'none'
-
 #Connect oled type is sh1106
 serial = i2c(port=4, address=0x3C)
 device = sh1106(serial)
 
-def debug_info(str):
-    if debug:
-        if debug_function in str:
-            sys.stdout.write("%s\n" % str)
-
 # HTTP Server
-class SimpleWeb(BaseHTTPRequestHandler):
-    def debug_info(str):
-        if debug:
-            if debug_function in str:
-                sys.stdout.write("%s\n" % str)
+class Server(BaseHTTPRequestHandler):
+    def do_HEAD(self):
+        return
+
+    def do_POST(self):
+        return
+
+    def handle_http(self, status, content_type):
+        self.send_response(status)
+        self.send_header('Content-type', content_type)
+        self.end_headers()
+        return bytes("Hello World", "UTF-8")
+        
+    def respond(self):
+        content = self.handle_http(200, 'text/html')
+        self.wfile.write(content)   
 
     def do_GET(self):        
-        # Get parameter
-        debug_info("FUNCTION do_GET: %r" % self)
-        debug_info("FUNCTION do_GET: %r" % self.path)
+        self.respond()
+
+'''        # Get parameter
+        print("FUNCTION do_GET: %r" % self)
+        print("FUNCTION do_GET: %r" % self.path)
         query = urlparse(self.path).query
-        debug_info("FUNCTION do_GET: query - %r" % query)
+        print("FUNCTION do_GET: query - %r" % query)
         mobject = parse_qs(query).get('messier', None)
-        debug_info("FUNCTION do_GET: mobject - %r" % mobject)
+        print("FUNCTION do_GET: mobject - %r" % mobject)
 
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-
+'''
 '''        if mobject:
             # get Coords of Sky Object
             skyobject = SkyCoord.from_name(mobject)
@@ -114,18 +118,18 @@ class SimpleWeb(BaseHTTPRequestHandler):
             self.wfile.write(bytes("</body></html>", "utf-8"))'''
 
 if __name__ == "__main__":
+    #Set local site (AltAz)
+    location = EarthLocation.of_address(site_address)
+    print("Location %r" % location)
+
+    # Start Web server
+    httpd = HTTPServer((server_name, server_port), Server)
+    print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
+
     try:
-        #Set local site (AltAz)
-        location = EarthLocation.of_address(site_address)
-        debug_info("Location %r" % location)
-
-        # Start Web server
-        debug_info("Star Coords server started http://%s:%s" % (server_name, server_port))
-        webServer = HTTPServer((server_name, server_port), SimpleWeb)
-
-        webServer.serve_forever()
+        httpd.serve_forever()
     except KeyboardInterrupt:
         pass
 
-    webServer.server_close()
-    debug_info("Server stopped")
+    httpd.server_close()
+    print(time.asctime(), 'Server DOWN - %s:%s' % (server_name, server_port))
