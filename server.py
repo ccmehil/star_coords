@@ -72,11 +72,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
-        
+        '''
         query = urlparse(self).query
         messier = parse_qs(query).get('messier', None)
-
         print(messier)
+        '''
         return bytes("Hello World", "UTF-8")
         
     def respond(self):
