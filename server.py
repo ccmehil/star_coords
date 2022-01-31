@@ -72,6 +72,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
+        
+        query = urlparse(self).query
+        messier = parse_qs(query).get('messier', None)
+
+        print(messier)
         return bytes("Hello World", "UTF-8")
         
     def respond(self):
@@ -79,11 +84,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.wfile.write(content)   
 
     def do_GET(self):        
+        print("FUNCTION do_GET: %r" % self)
+        print("FUNCTION do_GET: %r" % self.path)
         self.respond()
 
 '''        # Get parameter
-        print("FUNCTION do_GET: %r" % self)
-        print("FUNCTION do_GET: %r" % self.path)
         query = urlparse(self.path).query
         print("FUNCTION do_GET: query - %r" % query)
         mobject = parse_qs(query).get('messier', None)
