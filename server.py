@@ -59,10 +59,6 @@ site_longitude = config.get("site", "longitude") #e.g. -0.012965
 debug = True
 debug_function = 'none'
 
-#Set local site (AltAz)
-location = EarthLocation.of_address(site_address)
-debug_info("Location %r" % location)
-
 #Connect oled type is sh1106
 serial = i2c(port=4, address=0x3C)
 device = sh1106(serial)
@@ -104,6 +100,11 @@ def main(argv):
         sys.exit()
 
 if __name__ == "__main__":
+    #Set local site (AltAz)
+    location = EarthLocation.of_address(site_address)
+    debug_info("Location %r" % location)
+
+    # Start Web server
     webServer = HTTPServer((server_name, server_port), SimpleWeb)
     sys.stdout.write("Star Coords server started http://%s:%s" % (server_name, server_port))
 
