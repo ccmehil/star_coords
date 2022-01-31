@@ -83,7 +83,7 @@ debug_info("Location %r" % location)
 
 #Connect oled
 serial = i2c(port=4, address=0x3C)
-device = ssd1306(serial)
+device = sh1106(serial)
 
 if __name__ == "__main__":
     arg = main(sys.argv[1:])
