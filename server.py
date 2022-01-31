@@ -58,7 +58,7 @@ site_latitude = config.get("site", "latitude") #e.g. 51.4874277
 site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
 # Use OLED?
-oled_active = False
+oled_active = TRUE
 
 #Connect oled type is sh1106
 if oled_active:
