@@ -6,6 +6,10 @@ As a very very newcomer to the astronomy scene and living in a area with a bit h
 
 My understanding is the the Alt is a degree point ona 360 degree circle where 0 is True North. and Az is a degree of elevation or tilt the telescope has within a range of -90 to 90 degrees. Where as other from 0 to 90 is visible, although based on my elevation anything from 30 to 90 is more likely.
 
+# Dependencies
+
+> [luma.oled](https://pypi.org/project/luma.oled/)
+
 # Usage
 
 > server.py -m M41
