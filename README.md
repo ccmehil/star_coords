@@ -12,7 +12,13 @@ My understanding is the the Alt is a degree point ona 360 degree circle where 0 
 
 # Usage
 
-> server.py
+> python3 server.py
+
+To use the server once it is running you will need to make an HTTP request.
+
+> http://10.0.0.1:8080?messier=M41
+
+The IP address of course is whatever that of your Raspberry Pi is and the parameter "messier=XXX" is a object from the [Messier Catalog](https://en.wikipedia.org/wiki/Messier_object).
 
 # Hardware
 
