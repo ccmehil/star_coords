@@ -73,12 +73,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.send_header('Content-type', content_type)
         self.end_headers()
 
-        print("FUNCTION do_GET: %r" % self)
-        print("FUNCTION do_GET: %r" % self.path)
         query = urlparse(self.path).query
-        print("FUNCTION do_GET: query - %r" % query)
         messier = parse_qs(query).get('messier', None)
-        print("FUNCTION do_GET: messier - %r" % messier)
+        print("FUNCTION do_GET: messier - %r" % messier[0])
         '''
             # get Coords of Sky Object
             skyobject = SkyCoord.from_name(mobject)
