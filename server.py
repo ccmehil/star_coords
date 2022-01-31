@@ -24,7 +24,6 @@ from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from server import Server
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -62,7 +61,7 @@ serial = i2c(port=4, address=0x3C)
 device = sh1106(serial)
 
 # HTTP Server
-class Server(BaseHTTPRequestHandler):
+class SimpleWebServer(BaseHTTPRequestHandler):
     def do_HEAD(self):
         return
 
@@ -123,7 +122,7 @@ if __name__ == "__main__":
     print("Location %r" % location)
 
     # Start Web server
-    httpd = HTTPServer((server_name, server_port), Server)
+    httpd = HTTPServer((server_name, server_port), SimpleWebServer)
     print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
 
     try:
