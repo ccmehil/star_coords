@@ -84,12 +84,12 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         # Output to OLED
         with canvas(device) as draw:
             draw.rectangle(device.bounding_box, outline="white", fill="black")
-            draw.text((3, 10), "    Star Coords     ", fill="white")
+            draw.text((3, 10), "  Star Coords - %s  " % messier[0], fill="white")
             draw.text((3, 20), "--------------------", fill="white")
             draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
             draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
         # Output to HTTP Request
-        str = "Star Coords: Base: = %s Scope: = %s" % (az.rpartition('d')[0],  alt.rpartition('d')[0])        
+        str = "Star Coords - %s: Base: = %s Scope: = %s" % (messier[0], az.rpartition('d')[0],  alt.rpartition('d')[0])        
         return bytes(str, "UTF-8")
         
     def respond(self):
