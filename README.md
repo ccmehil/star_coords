@@ -22,11 +22,11 @@ The IP address of course is whatever that of your Raspberry Pi is and the parame
 
 If you are an Apple user you can use this [Apple Shortcut](https://www.icloud.com/shortcuts/ba09a1a658c7462484d6e64e5392c1a3) I made to interact with the server while star gazing. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
+![Notifications from the Shortcut](docs/IMG_0933.jpg "Notifications")
+
 With the current version you can also search for a planet. This is an either or type of search either a Messier Object or a Planet, not both.
 
 > http://10.0.0.1:8080?planet=mars
-
-![Notifications from the Shortcut](docs/IMG_0933.jpg "Notifications")
 
 Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe59aadaaea7) I made is to interact with the server while looking for a planet. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
