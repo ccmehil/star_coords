@@ -109,7 +109,6 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             if (planet[0].lower() in theplanets):
                 now = dt.utcnow()
                 dt_string = dt_string = now.strftime("%Y-%m-%d %H:%M")
-                print(dt_string)
                 t = Time(dt_string)
                 with solar_system_ephemeris.set('builtin'):
                     planetlocation = get_body(planet[0].lower(), t, location) 
