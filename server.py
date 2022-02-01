@@ -17,7 +17,8 @@ from time import sleep
 import numpy as np
 import astropy.units as u
 from astropy.time import Time
-from astropy.coordinates import SkyCoord, EarthLocation, AltAz
+from astropy.coordinates import SkyCoord, EarthLocation, AltAz, solar_system_ephemeris
+from astropy.coordinates import get_body_barycentric, get_body, get_moon
 # oled Display
 from luma.core.interface.serial import i2c, spi, pcf8574
 from luma.core.interface.parallel import bitbang_6800
@@ -57,6 +58,9 @@ site_address = config.get("site", "address") #e.g. Greenwich
 site_latitude = config.get("site", "latitude") #e.g. 51.4874277
 site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
+# Planet Objects
+theplanets = ['earth', 'sun',  'moon', 'mercury', 'venus', 'earth-moon-barycenter', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
+
 # Use OLED?
 oled_active = TRUE
 
@@ -80,15 +84,17 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 
         query = urlparse(self.path).query
         messier = parse_qs(query).get('messier', None)
+        planet = parse_qs(query).get('planet', None)
         print(messier)
-        
+        print(planet)
+
         # get Coords of Sky Object for a Messier Object
         str = ''
         if(messier is not None):
             skyobject = SkyCoord.from_name(messier[0].upper())
             skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
             az = skyobjectaltaz.az.to_string()
-            alt = skyobjectaltaz.alt.to_string()    
+            alt = skyobjectaltaz.alt.to_string()
             # Output to OLED
             if oled_active:
                 with canvas(device) as draw:
@@ -98,7 +104,38 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                     draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
                     draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
             # Output to HTTP Request
-            str = "%s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])   
+            str = "%s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])
+        elif(planet is not None):
+            if (planet[0].lower() in theplanets):
+                now = dt.utcnow()
+                dt_string = dt_string = now.strftime("%Y-%m-%d %H:%M")
+                print(dt_string)
+                t = Time(dt_string)
+                with solar_system_ephemeris.set('builtin'):
+                    planetlocation = get_body(planet[0].lower(), t, location) 
+                ra = planetlocation.ra.to_string()
+                dec = planetlocation.dec.to_string() 
+                # Output to OLED
+                if oled_active:
+                    with canvas(device) as draw:
+                        draw.rectangle(device.bounding_box, outline="white", fill="black")
+                        draw.text((3, 10), "  Planet Coords - %s  " % planet[0].upper(), fill="white")
+                        draw.text((3, 20), "--------------------", fill="white")
+                        draw.text((3, 30), "   Base: = %s" % ra.rpartition('d')[0], fill="white")        
+                        draw.text((3, 40), "  Scope: = %s" % dec.rpartition('d')[0], fill="white")
+                # Output to HTTP Request
+                str = "%s: Base: = %s Scope: = %s" % (planet[0].upper(), ra.rpartition('d')[0],  dec.rpartition('d')[0])
+            else:
+                # Output to OLED
+                if oled_active:
+                    with canvas(device) as draw:
+                        draw.rectangle(device.bounding_box, outline="white", fill="black")
+                        draw.text((3, 10), "  Planet Coords   ", fill="white")
+                        draw.text((3, 20), "--------------------", fill="white")
+                        draw.text((3, 30), "   Base: = ", fill="white")        
+                        draw.text((3, 40), "  Scope: = ", fill="white")
+                # Output to HTTP Request
+                str = "Invalid Planet should be %s", theplanets
         else:
             # Output to OLED
             if oled_active:
@@ -109,7 +146,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                     draw.text((3, 30), "   Base: ", fill="white")        
                     draw.text((3, 40), "  Scope: ", fill="white")
             # Output to HTTP Request
-            str = "No Messier Object"
+            str = "No Messier Object or Planet"
         return bytes(str, "UTF-8")
         
     def respond(self):
