@@ -24,6 +24,11 @@ If you are an Apple user you can use this [Apple Shortcut](https://www.icloud.co
 
 ![Notifications from the Shortcut](docs/IMG_0933.jpg "Notifications")
 
+Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe59aadaaea7) I made is to interact with the server while looking for a planet. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
+
+![Notifications from the Shortcut](docs/IMG_PLANET_NOT.jpeg "Notifications")
+
+
 # To Do
 
 Incorporate other objects than just those of the Messier Catalog, such as the planets.
