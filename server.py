@@ -119,10 +119,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 if oled_active:
                     with canvas(device) as draw:
                         draw.rectangle(device.bounding_box, outline="white", fill="black")
-                        draw.text((3, 10), "  Planet Coords - %s  " % planet[0].upper(), fill="white")
-                        draw.text((3, 20), "--------------------", fill="white")
-                        draw.text((3, 30), "   Base: = %s" % ra.rpartition('d')[0], fill="white")        
-                        draw.text((3, 40), "  Scope: = %s" % dec.rpartition('d')[0], fill="white")
+                        draw.text((3, 10), "  Planet Coords     ", fill="white")
+                        draw.text((3, 20), "  %s                " % planet[0].upper(), fill="white")
+                        draw.text((3, 30), "--------------------", fill="white")
+                        draw.text((3, 40), "   Base: = %s" % ra.rpartition('d')[0], fill="white")        
+                        draw.text((3, 50), "  Scope: = %s" % dec.rpartition('d')[0], fill="white")
                 # Output to HTTP Request
                 str = "%s: Base: = %s Scope: = %s" % (planet[0].upper(), ra.rpartition('d')[0],  dec.rpartition('d')[0])
             else:
