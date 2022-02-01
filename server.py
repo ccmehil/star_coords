@@ -81,21 +81,34 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         messier = parse_qs(query).get('messier', None)
         
-        # get Coords of Sky Object
-        skyobject = SkyCoord.from_name(messier[0].upper())
-        skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-        az = skyobjectaltaz.az.to_string()
-        alt = skyobjectaltaz.alt.to_string()    
-        # Output to OLED
-        if oled_active:
-            with canvas(device) as draw:
-                draw.rectangle(device.bounding_box, outline="white", fill="black")
-                draw.text((3, 10), "  Star Coords - %s  " % messier[0].upper(), fill="white")
-                draw.text((3, 20), "--------------------", fill="white")
-                draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
-                draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
-        # Output to HTTP Request
-        str = "%s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])        
+        # get Coords of Sky Object for a Messier Object
+        str = ''
+        if bool(messier):
+            skyobject = SkyCoord.from_name(messier[0].upper())
+            skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+            az = skyobjectaltaz.az.to_string()
+            alt = skyobjectaltaz.alt.to_string()    
+            # Output to OLED
+            if oled_active:
+                with canvas(device) as draw:
+                    draw.rectangle(device.bounding_box, outline="white", fill="black")
+                    draw.text((3, 10), "  Star Coords - %s  " % messier[0].upper(), fill="white")
+                    draw.text((3, 20), "--------------------", fill="white")
+                    draw.text((3, 30), "   Base: = %s" % az.rpartition('d')[0], fill="white")        
+                    draw.text((3, 40), "  Scope: = %s" % alt.rpartition('d')[0], fill="white")
+            # Output to HTTP Request
+            str = "%s: Base: = %s Scope: = %s" % (messier[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])   
+        else:
+            # Output to OLED
+            if oled_active:
+                with canvas(device) as draw:
+                    draw.rectangle(device.bounding_box, outline="white", fill="black")
+                    draw.text((3, 10), "  Star Coords -    ", fill="white")
+                    draw.text((3, 20), "--------------------", fill="white")
+                    draw.text((3, 30), "   Base: ", fill="white")        
+                    draw.text((3, 40), "  Scope: ", fill="white")
+            # Output to HTTP Request
+            str = "No Messier Object"
         return bytes(str, "UTF-8")
         
     def respond(self):
