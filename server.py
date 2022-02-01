@@ -135,18 +135,18 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                         draw.text((3, 30), "   Base: = ", fill="white")        
                         draw.text((3, 40), "  Scope: = ", fill="white")
                 # Output to HTTP Request
-                str = "Invalid Planet should be %s", theplanets
+                str = "Invalid Planet should be %s" % theplanets
         else:
             # Output to OLED
             if oled_active:
                 with canvas(device) as draw:
                     draw.rectangle(device.bounding_box, outline="white", fill="black")
-                    draw.text((3, 10), "  Star Coords -    ", fill="white")
+                    draw.text((3, 10), "     Star Coords    ", fill="white")
                     draw.text((3, 20), "--------------------", fill="white")
                     draw.text((3, 30), "   Base: ", fill="white")        
                     draw.text((3, 40), "  Scope: ", fill="white")
             # Output to HTTP Request
-            str = "No Messier Object or Planet"
+            str = "No Messier Object or Invalid Planet should be %s" % theplanets
         return bytes(str, "UTF-8")
         
     def respond(self):
