@@ -59,7 +59,7 @@ site_latitude = config.get("site", "latitude") #e.g. 51.4874277
 site_longitude = config.get("site", "longitude") #e.g. -0.012965
 
 # Planet Objects
-theplanets = ['earth', 'sun',  'moon', 'mercury', 'venus', 'earth-moon-barycenter', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
+theplanets = ['sun',  'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
 
 # Use OLED?
 oled_active = TRUE
