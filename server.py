@@ -141,10 +141,10 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             if oled_active:
                 with canvas(device) as draw:
                     draw.rectangle(device.bounding_box, outline="white", fill="black")
-                    draw.text((3, 10), "     Star Coords    ", fill="white")
-                    draw.text((3, 20), "--------------------", fill="white")
-                    draw.text((3, 30), "   Base: ", fill="white")        
-                    draw.text((3, 40), "  Scope: ", fill="white")
+                    draw.text((3, 10), "--------------------", fill="white")
+                    draw.text((3, 20), "     Star Coords    ", fill="white")
+                    draw.text((3, 30), "    Planet Coords   ", fill="white")
+                    draw.text((3, 40), "--------------------", fill="white")
             # Output to HTTP Request
             str = "No Messier Object or Invalid Planet should be %s" % theplanets
         return bytes(str, "UTF-8")
