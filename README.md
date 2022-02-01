@@ -22,7 +22,7 @@ The IP address of course is whatever that of your Raspberry Pi is and the parame
 
 If you are an Apple user you can use this [Apple Shortcut](https://www.icloud.com/shortcuts/ba09a1a658c7462484d6e64e5392c1a3) I made to interact with the server while star gazing. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
-![Notifications from the Shortcut](IMG_0933.jpg "Notifications")
+![Notifications from the Shortcut](docs/IMG_0933.jpg "Notifications")
 
 # To Do
 
@@ -30,14 +30,14 @@ Incorporate other objects than just those of the Messier Catalog, such as the pl
 
 # Hardware
 
-![Example Running](IMG_0931.jpg "Live")
+![Example Running](docs/IMG_0931.jpg "Live")
 
-![Wiring](Raspberry_Pi_OLED_Display_128_64.jpg "RPi Wiring")
+![Wiring](docs/Raspberry_Pi_OLED_Display_128_64.jpg "RPi Wiring")
 
 
 # Extras
 
 This is a porject by a hobby newbie, I've had a telescope for less than a month whenI created this project and I'm still learning, lingo and other associations. All feedback, contribution and engagement is welcome! Python is also relatively new to me. 
 
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [License](LICENSE)
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [License](docs/LICENSE)
