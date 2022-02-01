@@ -83,7 +83,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         
         # get Coords of Sky Object for a Messier Object
         str = ''
-        if bool(messier):
+        if bool(messier[0]):
             skyobject = SkyCoord.from_name(messier[0].upper())
             skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
             az = skyobjectaltaz.az.to_string()
