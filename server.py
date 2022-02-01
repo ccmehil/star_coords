@@ -78,8 +78,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.send_header('Content-type', content_type)
         self.end_headers()
 
-        query = urlparse(self.path).query
-        messier = parse_qs(query).get('messier', None)
+        #query = urlparse(self.path).query
+        #messier = parse_qs(query).get('messier', None)
+        
+        messier = self.request.get('messier')
+        print(messier)
         
         # get Coords of Sky Object for a Messier Object
         str = ''
