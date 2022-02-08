@@ -40,11 +40,11 @@ if not os.path.isfile(config_file):
     print("Using default settings")
     h = open("server.ini", "w")
     # default web server for localhost
-    h.write("[server]\n")
+    h.write("[server]")
     h.write("\nname=10.0.0.1")
     h.write("\nport=8080")
     #Default to Greenwich as the site, 1 as tz
-    h.write("[site]\n")
+    h.write("[\nsite]")
     h.write("\naddress=Greenwich")
     h.write("\nlatitude=51.4874277")
     h.write("\nlongitude=-0.012965")
