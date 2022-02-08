@@ -92,3 +92,4 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 - add I2C address to config
 - provide dummy config to GIT for project?
 - Combine auto lookup of Lat/Lon from setuphelp.py into main program
+- add url param to shutdown the server?
