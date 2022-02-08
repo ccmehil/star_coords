@@ -18,7 +18,7 @@ The whole thing has been written using Python 3+
 # Install
 
 ```
-sudo apt-get install git python3-pip libatlas3-base libopenjp2-7
+sudo apt-get install git python3-pip libatlas3-base libopenjp2-7 i2c-tools
 sudo pip3 install luma.oled
 sudo pip3 install astropy
 sudo pip3 install numpy
@@ -84,3 +84,6 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 # TODO
 
 - Use command line arguments to set server and port for first install or even trigger the creation of the configuration file and prompt the user to edit it?
+- add OLED true/false to config
+- add I2C address to config
+- provide dummy config to GIT for project?
