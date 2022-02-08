@@ -66,7 +66,7 @@ oled_active = TRUE
 
 #Connect oled type is sh1106
 if oled_active:
-    serial = i2c(port=2, address=0x3C)
+    serial = i2c(port=1, address=0x3C)
     device = sh1106(serial)
 
 # HTTP Server
