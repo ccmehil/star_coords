@@ -88,6 +88,7 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 # TODO
 
 - Use command line arguments to set server and port for first install or even trigger the creation of the configuration file and prompt the user to edit it?
+- move server binding and port to command and not in config?
 - add OLED true/false to config
 - add I2C address to config
 - provide dummy config to GIT for project?
