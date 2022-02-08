@@ -28,6 +28,12 @@ git clone https://github.com/ccmehil/star_coords.git
 
 # Configuration
 
+To determine the address for your OLED screen
+
+```sudo i2cdetect -y 1```
+
+
+
 ```python /home/pi/star_coords/server.py```
 
 Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program if it has not already. You can of course use whatever editor you like here I chose ```nano```
