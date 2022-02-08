@@ -32,6 +32,8 @@ To determine the address for your OLED screen
 
 ```sudo i2cdetect -y 1```
 
+Now to do an initial start and get the config file
+
 ```python /home/pi/star_coords/server.py```
 
 Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program if it has not already. You can of course use whatever editor you like here I chose ```nano```
@@ -40,7 +42,7 @@ Running the program the first time will write a configuration file. You will nee
 
 # Troubleshooting
 
-If you are getting odd errors related to ```numpy```you may need to do the following.
+If you are getting odd errors related to ```numpy``` you may need to do the following.
 
 ```
 pip3 uninstall numpy
