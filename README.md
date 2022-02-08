@@ -27,15 +27,15 @@ git clone https://github.com/ccmehil/star_coords.git
 
 # Configuration
 
-> python /home/pi/star_coords/server.py
+```python /home/pi/star_coords/server.py```
 
-Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C```to exit the program.
+Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program.
 
-> nano /home/pi/star_coords/
+```nano /home/pi/star_coords/```
 
 # Usage
 
-> python /home/pi/star_coords/server.py
+```python /home/pi/star_coords/server.py```
 
 To use the server once it is running you will need to make an HTTP request.
 
