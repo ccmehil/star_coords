@@ -74,10 +74,13 @@ I'm using a sh1106 module for the OLED display and a [Raspberry Pi Zero W](https
 
 ![Wiring](docs/Raspberry_Pi_OLED_Display_128_64.jpg "RPi Wiring")
 
-
 # Extras
 
 This is a project by a hobby newbie, I've had a telescope for less than a month when I created this project and I'm still learning, lingo and other associations. All feedback, contribution and engagement is welcome! Python is also relatively new to me. 
 
 - [Code of Conduct](docs/CODE_OF_CONDUCT.md)
 - [License](docs/LICENSE)
+
+# TODO
+
+- Use command line arguments to set server and port for first install or even trigger the creation of the configuration file and prompt the user to edit it?
