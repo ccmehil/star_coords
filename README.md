@@ -40,6 +40,19 @@ Running the program the first time will write a configuration file. You will nee
 
 ```nano /home/pi/star_coords/server.ini```
 
+```
+[server]
+name=10.0.0.1
+port=8080
+
+[site]
+address=Greenwich
+latitude=51.4874277
+longitude=-0.012965
+```
+
+ Server name is the IP or hostname of the Raspberry Pi. To set your own specific Lat/Lon you can use the ```setuphelp.py``` program, just modify the *myaddress* before you run it.
+
 # Troubleshooting
 
 If you are getting odd errors related to ```numpy``` you may need to do the following.
