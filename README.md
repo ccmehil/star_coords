@@ -115,7 +115,7 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 
 Don't do this unless you are sure it's running properly with your information saved and taken care.
 
-````
+```
 sudo nano /etc/profile
 ```
 
