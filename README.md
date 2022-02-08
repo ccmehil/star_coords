@@ -32,8 +32,6 @@ To determine the address for your OLED screen
 
 ```sudo i2cdetect -y 1```
 
-
-
 ```python /home/pi/star_coords/server.py```
 
 Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program if it has not already. You can of course use whatever editor you like here I chose ```nano```
@@ -93,3 +91,4 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 - add OLED true/false to config
 - add I2C address to config
 - provide dummy config to GIT for project?
+- Combine auto lookup of Lat/Lon from setuphelp.py into main program
