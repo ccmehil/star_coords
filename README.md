@@ -109,3 +109,20 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 - provide dummy config to GIT for project?
 - Combine auto lookup of Lat/Lon from setuphelp.py into main program
 - add url param to shutdown the server?
+- add url param for Lat/Lon updates? Good be good if you are moving around with your telescope
+
+# OPTIONAL (not tested)
+
+Don't do this unless you are sure it's running properly with your information saved and taken care.
+
+````
+sudo nano /etc/profile
+```
+
+Scroll to the bottom and add the following line
+
+```
+sudo python /home/pi/star_coords/server.py
+```
+
+This will start the server on boot/reboot.

@@ -34,6 +34,14 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
+print("******************************************************")
+print("*                   Star Coords                      *")
+print("* Hopefully you triggered this to start with boot    *")
+print("* after you did the configuration and tested that    *")
+print("* it is working properly. Otherwise...               *")
+print("* pkill -9 -f server.py                              *")
+print("******************************************************")
+
 print("Checking Configuration")
 config_file = "server.ini"
 if not os.path.isfile(config_file):
