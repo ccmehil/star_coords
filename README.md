@@ -8,11 +8,31 @@ My understanding is the the Alt is a degree point ona 360 degree circle where 0 
 
 # Dependencies
 
+The whole thing has been written using Python 3+
+
 > [luma.oled](https://pypi.org/project/luma.oled/)
+> [numpy](https://pypi.org/project/mumpy/)
+> [astropy](https://www.astropy.org)
+
+# Install
+
+> sudo apt-get install git python3-pip
+> sudo pip install luma.oled
+> sudo pip install astropy
+> cd /home/pi/
+> git clone https://github.com/ccmehil/star_coords.git
+
+# Configuration
+
+> python /home/pi/star_coords/server.py
+
+Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C```to exit the program.
+
+> nano /home/pi/star_coords/
 
 # Usage
 
-> python3 server.py
+> python /home/pi/star_coords/server.py
 
 To use the server once it is running you will need to make an HTTP request.
 
@@ -32,12 +52,9 @@ Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe
 
 ![Notifications from the Shortcut](docs/IMG_PLANET_NOT.jpeg "Notifications")
 
-
-# To Do
-
-Incorporate other objects than just those of the Messier Catalog, such as the planets.
-
 # Hardware
+
+I'm using a sh1106 module for the OLED display
 
 ![Example Running](docs/IMG_0931.jpg "Live")
 
@@ -46,7 +63,7 @@ Incorporate other objects than just those of the Messier Catalog, such as the pl
 
 # Extras
 
-This is a porject by a hobby newbie, I've had a telescope for less than a month whenI created this project and I'm still learning, lingo and other associations. All feedback, contribution and engagement is welcome! Python is also relatively new to me. 
+This is a project by a hobby newbie, I've had a telescope for less than a month when I created this project and I'm still learning, lingo and other associations. All feedback, contribution and engagement is welcome! Python is also relatively new to me. 
 
 - [Code of Conduct](docs/CODE_OF_CONDUCT.md)
 - [License](docs/LICENSE)

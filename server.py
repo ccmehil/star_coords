@@ -14,7 +14,6 @@ import datetime
 from datetime import datetime as dt
 from time import sleep
 # Astro
-import numpy as np
 import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz, solar_system_ephemeris
