@@ -18,9 +18,10 @@ The whole thing has been written using Python 3+
 # Install
 
 ```
-sudo apt-get install git python3-pip python3-numpy
+sudo apt-get install git python3-pip libatlas3-base 
 sudo pip install luma.oled
 sudo pip install astropy
+sudo pip install numpy
 cd /home/pi/
 git clone https://github.com/ccmehil/star_coords.git
 ```
@@ -32,6 +33,12 @@ git clone https://github.com/ccmehil/star_coords.git
 Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program.
 
 ```nano /home/pi/star_coords/```
+
+# Troubeshooting
+
+If you get the following error when attempting to run the program.
+
+```pip install numpy --upgrade``
 
 # Usage
 
@@ -57,7 +64,7 @@ Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe
 
 # Hardware
 
-I'm using a sh1106 module for the OLED display
+I'm using a sh1106 module for the OLED display and a [Raspberry Pi Zero W](https://www.raspberrypi.com/products/raspberry-pi-zero-w/) 
 
 ![Example Running](docs/IMG_0931.jpg "Live")
 
