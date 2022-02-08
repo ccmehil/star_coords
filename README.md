@@ -18,6 +18,7 @@ The whole thing has been written using Python 3+
 
 > sudo apt-get install git python3-pip
 > sudo pip install luma.oled
+> sudo pip install numpy
 > sudo pip install astropy
 > cd /home/pi/
 > git clone https://github.com/ccmehil/star_coords.git
