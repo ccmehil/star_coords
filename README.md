@@ -30,7 +30,7 @@ git clone https://github.com/ccmehil/star_coords.git
 
 ```python /home/pi/star_coords/server.py```
 
-Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program.
+Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program if it has not already. You can of course use whatever editor you like here I chose ```nano```
 
 ```nano /home/pi/star_coords/server.ini```
 
