@@ -168,7 +168,7 @@ if __name__ == "__main__":
     print("Location %r" % location)
 
     # Start Web server
-    httpd = HTTPServer((server_name, server_port), SimpleWebServer)
+    httpd = HTTPServer((server_name, int(server_port)), SimpleWebServer)
     print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
 
     try:
