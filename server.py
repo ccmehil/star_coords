@@ -158,9 +158,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 # Output to HTTP Request
                 str = "Invalid Planet should be %s" % theplanets
         elif(getout is not None):
-            # Output to OLED
             outputDisplay("     Star Coords    ", "      Shutdown      ")
-            str = "Shutting down server"
+            sleep(10)
+            sys.exit()
         else:
             # Output to OLED
             if oled_active:
