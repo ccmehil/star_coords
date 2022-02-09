@@ -4,7 +4,6 @@ Use AstroPy to output AltAz for a object in the sky
 Craig Cmehil - https://github.com/ccmehil
 """
 
-from asyncio.windows_events import NULL
 import os
 from pickle import TRUE
 import sys
