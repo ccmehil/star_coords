@@ -100,17 +100,6 @@ This is a project by a hobby newbie, I've had a telescope for less than a month 
 - [Code of Conduct](docs/CODE_OF_CONDUCT.md)
 - [License](docs/LICENSE)
 
-# TODO
-
-- Use command line arguments to set server and port for first install or even trigger the creation of the configuration file and prompt the user to edit it?
-- move server binding and port to command and not in config?
-- add OLED true/false to config
-- add I2C address to config
-- provide dummy config to GIT for project?
-- Combine auto lookup of Lat/Lon from setuphelp.py into main program
-- add url param to shutdown the server?
-- add url param for Lat/Lon updates? Good be good if you are moving around with your telescope
-
 # OPTIONAL (not tested)
 
 Don't do this unless you are sure it's running properly with your information saved and taken care.
