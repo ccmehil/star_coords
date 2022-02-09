@@ -85,6 +85,10 @@ Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe
 
 ![Notifications from the Shortcut](docs/IMG_PLANET_NOT.jpeg "Notifications")
 
+To stop the server once it is running you will need to make an HTTP request.
+
+> http://10.0.0.1:8080?getout=true
+
 # Hardware
 
 I'm using a sh1106 module for the OLED display and a [Raspberry Pi Zero W](https://www.raspberrypi.com/products/raspberry-pi-zero-w/) 
