@@ -4,6 +4,7 @@ Use AstroPy to output AltAz for a object in the sky
 Craig Cmehil - https://github.com/ccmehil
 """
 
+from asyncio.windows_events import NULL
 import os
 from pickle import TRUE
 import sys
@@ -130,7 +131,8 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     # Use OLED?
     oled_active = sys.argv[1]
-    print(oled_active)
+    if oled_active == "":
+        oled_active = TRUE
 
     #Connect oled type is sh1106
     if oled_active:
@@ -138,9 +140,9 @@ if __name__ == "__main__":
         device = sh1106(serial)
 
     server_name = "%s.local" % os.uname()[1]
-    print(server_name)
     server_port = int(sys.argv[2])
-    print(server_port)
+    if server_port == NULL:
+        server_port = 8080
 
     #Set local site (AltAz)
     location = EarthLocation.of_address('Greenwich')
