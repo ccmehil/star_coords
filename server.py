@@ -133,7 +133,7 @@ if __name__ == "__main__":
         device = sh1106(serial)
 
     server_name = sys.argv[2]
-    server_port = sys.argv[3]
+    server_port = int(sys.argv[3])
 
     #Set local site (AltAz)
     location = EarthLocation.of_address('Greenwich')
