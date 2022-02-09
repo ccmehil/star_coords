@@ -77,19 +77,19 @@ if oled_active:
     serial = i2c(port=1, address=0x3C)
     device = sh1106(serial)
 
+def outputDisplay(line1, line2):
+    # Output to OLED
+    if oled_active:
+        with canvas(device) as draw:
+            draw.rectangle(device.bounding_box, outline="white", fill="black")
+            draw.text((3, 10), "--------------------", fill="white")
+            draw.text((3, 20), line1, fill="white")
+            draw.text((3, 30), line2 , fill="white")
+            draw.text((3, 40), "--------------------", fill="white")
+    return
+
 # HTTP Server
 class SimpleWebServer(BaseHTTPRequestHandler):
-    def outputDisplay(line1, line2):
-        # Output to OLED
-        if oled_active:
-            with canvas(device) as draw:
-                draw.rectangle(device.bounding_box, outline="white", fill="black")
-                draw.text((3, 10), "--------------------", fill="white")
-                draw.text((3, 20), line1, fill="white")
-                draw.text((3, 30), line2 , fill="white")
-                draw.text((3, 40), "--------------------", fill="white")
-        return
-
     def do_HEAD(self):
         return
 
