@@ -51,7 +51,7 @@ sudo pip3 install numpy
 
 # Usage
 
-```python /home/pi/star_coords/server.py -d TRUE -s raspberrypi.local -p 8080```
+```python /home/pi/star_coords/server.py -d TRUE -s 10.0.0.1 -p 8080```
 
 - > -d either TRUE or FALSE if you want to use the OLED display or not, no value defaults to TRUE
 - > -s is your hostname or IP of your Raspberry Pi, mine the hostname is ```starcoords```so I would give ```starcoords.local``` no value will result in it getting the hostname and adding ```.local``` automatically.
@@ -60,7 +60,7 @@ sudo pip3 install numpy
 
 To use the server once it is running you will need to make an HTTP request.
 
-Your first request should be to set your location. This can be your specific street address, etc. If you do this via an Apple Shortcut you can use the mapping function to get your address.
+Your first request should be to set your location. This can be your specific street address, etc. If you do this via an [Apple Shortcut](https://www.icloud.com/shortcuts/ed1fcc7a6bf343089970c8e5d545aebb) you can use the mapping function to get your address. In these examples the IP address of course is whatever that of your Raspberry Pi or your hostname you gave above when starting the server.
 
 > http://10.0.0.1:8080?address=Greenwich
 
@@ -72,7 +72,7 @@ Otherwise you can use either the ```messier``` or the ```planet``` parameters to
 
 > http://10.0.0.1:8080?messier=M41
 
-The IP address of course is whatever that of your Raspberry Pi is and the parameter "messier=XXX" is a object from the [Messier Catalog](https://en.wikipedia.org/wiki/Messier_object).
+The parameter "messier=XXX" is a object from the [Messier Catalog](https://en.wikipedia.org/wiki/Messier_object).
 
 If you are an Apple user you can use this [Apple Shortcut](https://www.icloud.com/shortcuts/ba09a1a658c7462484d6e64e5392c1a3) I made to interact with the server while star gazing. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
