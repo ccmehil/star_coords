@@ -58,7 +58,7 @@ sudo pip3 install numpy
 - > -p is the port number for the server to start on, no value will default to 8080
 
 
-To use the server once it is running you will need to make an HTTP request.
+To use the server once it is running you will need to make an HTTP request. It's important to **NOTE** that you need internet access for your Raspberry Pi to work! The Raspberry Pi needs to be connected to a hotspot or Wifi with Internet access and then you access it via a device on the same network as the Raspberry Pi.
 
 Your first request should be to set your location. This can be your specific street address, etc. If you do this via an [Apple Shortcut](https://www.icloud.com/shortcuts/9d29a74ce7744c2580c74f36ab9dfa5a) you can use the mapping function to get your address. In these examples the IP address of course is whatever that of your Raspberry Pi or your hostname you gave above when starting the server.
 
