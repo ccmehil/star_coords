@@ -92,6 +92,8 @@ def outputDisplay(line1, line2, line3, line4, line5):
 
 # HTTP Server
 class SimpleWebServer(BaseHTTPRequestHandler):
+    global location
+    
     def do_HEAD(self):
         return
 
