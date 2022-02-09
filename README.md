@@ -32,26 +32,12 @@ To determine the address for your OLED screen
 
 ```sudo i2cdetect -y 1```
 
-Now to do an initial start and get the config file
-
-```python /home/pi/star_coords/server.py```
-
-Running the program the first time will write a configuration file. You will need to edit this file so ```CTRL-C``` to exit the program if it has not already. You can of course use whatever editor you like here I chose ```nano```
-
-```nano /home/pi/star_coords/server.ini```
+You will need to possibly modify ```server.py``` lines: 163-164
 
 ```
-[server]
-name=10.0.0.1
-port=8080
-
-[site]
-address=Greenwich
-latitude=51.4874277
-longitude=-0.012965
+serial = i2c(port=1, address=0x3C)
+device = sh1106(serial)
 ```
-
- Server name is the IP or hostname of the Raspberry Pi. To set your own specific Lat/Lon you can use the ```setuphelp.py``` program, just modify the *myaddress* before you run it.
 
 # Troubleshooting
 
@@ -65,9 +51,24 @@ sudo pip3 install numpy
 
 # Usage
 
-```python /home/pi/star_coords/server.py```
+```python /home/pi/star_coords/server.py -d TRUE -s raspberrypi.local -p 8080```
+
+- > -d either TRUE or FALSE if you want to use the OLED display or not, no value defaults to TRUE
+- > -s is your hostname or IP of your Raspberry Pi, mine the hostname is ```starcoords```so I would give ```starcoords.local``` no value will result in it getting the hostname and adding ```.local``` automatically.
+- > -p is the port number for the server to start on, no value will default to 8080
+
 
 To use the server once it is running you will need to make an HTTP request.
+
+Your first request should be to set your location. This can be your specific street address, etc. If you do this via an Apple Shortcut you can use the mapping function to get your address.
+
+> http://10.0.0.1:8080?address=Greenwich
+
+You can also deactivate or activate the OLED display from a HTTP call as well.
+
+> http://10.0.0.1:8080?display=TRUE
+
+Otherwise you can use either the ```messier``` or the ```planet``` parameters to search for your object based on your current location.
 
 > http://10.0.0.1:8080?messier=M41
 
@@ -88,6 +89,7 @@ Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe
 To stop the server once it is running you will need to make an HTTP request.
 
 > http://10.0.0.1:8080?getout=true
+
 
 # Hardware
 
