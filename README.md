@@ -60,7 +60,7 @@ sudo pip3 install numpy
 
 To use the server once it is running you will need to make an HTTP request.
 
-Your first request should be to set your location. This can be your specific street address, etc. If you do this via an [Apple Shortcut](https://www.icloud.com/shortcuts/ed1fcc7a6bf343089970c8e5d545aebb) you can use the mapping function to get your address. In these examples the IP address of course is whatever that of your Raspberry Pi or your hostname you gave above when starting the server.
+Your first request should be to set your location. This can be your specific street address, etc. If you do this via an [Apple Shortcut](https://www.icloud.com/shortcuts/9d29a74ce7744c2580c74f36ab9dfa5a) you can use the mapping function to get your address. In these examples the IP address of course is whatever that of your Raspberry Pi or your hostname you gave above when starting the server.
 
 > http://10.0.0.1:8080?address=Greenwich
 
