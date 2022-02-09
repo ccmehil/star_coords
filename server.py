@@ -25,6 +25,7 @@ from luma.core.interface.parallel import bitbang_6800
 from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
+import requests
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
@@ -106,6 +107,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         messier = parse_qs(query).get('messier', None)
         planet = parse_qs(query).get('planet', None)
         getout = parse_qs(query).get('getout', None)
+        myaddress = parse_qs(query).get('address', None)
 
         # get Coords of Sky Object for a Messier Object
         str = ''
@@ -133,6 +135,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 outputDisplay("  Planet Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
                 # Output to HTTP Request
                 str = "Invalid Planet should be %s" % theplanets
+        elif(myaddress is not None):
+            location = EarthLocation.of_address(myaddress[0])
+            print("Location %r" % location)
+            outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
+            str = "Your Latitude and Longitude have now been updated"
         elif(getout is not None):
             outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
             sleep(10)
