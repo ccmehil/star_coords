@@ -25,15 +25,10 @@ from luma.core.interface.parallel import bitbang_6800
 from luma.core.render import canvas
 from luma.oled.device import ssd1306, ssd1309, ssd1325, ssd1331, sh1106, ws0010
 # web server to send HTTP request for object locations
-import requests
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
 
 print("******************************************************")
 print("*                   Star Coords                      *")
@@ -43,40 +38,8 @@ print("* it is working properly. Otherwise...               *")
 print("* pkill -9 -f server.py                              *")
 print("******************************************************")
 
-print("Checking Configuration")
-config_file = "server.ini"
-if not os.path.isfile(config_file):
-    print("Using default settings")
-    h = open("server.ini", "w")
-    # default web server for localhost
-    h.write("[server]")
-    h.write("\nname=10.0.0.1")
-    h.write("\nport=8080")
-    #Default to Greenwich as the site, 1 as tz
-    h.write("[\nsite]")
-    h.write("\naddress=Greenwich")
-    h.write("\nlatitude=51.4874277")
-    h.write("\nlongitude=-0.012965")
-    h.close()
-
-config = configparser.ConfigParser()
-config.read("server.ini")
-server_name = config.get("server", "name") #e.g. 10.0.0.1
-server_port = config.getint("server", "port") #e.g. 8080
-site_address = config.get("site", "address") #e.g. Greenwich
-site_latitude = config.get("site", "latitude") #e.g. 51.4874277
-site_longitude = config.get("site", "longitude") #e.g. -0.012965
-
 # Planet Objects
 theplanets = ['sun',  'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
-
-# Use OLED?
-oled_active = TRUE
-
-#Connect oled type is sh1106
-if oled_active:
-    serial = i2c(port=1, address=0x3C)
-    device = sh1106(serial)
 
 def outputDisplay(line1, line2, line3, line4, line5):
     # Output to OLED
@@ -142,6 +105,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
         elif(getout is not None):
+            global server_name, server_port
             outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
             sleep(10)
             print(time.asctime(), 'Server DOWN - %s:%s' % (server_name, server_port))
@@ -160,8 +124,19 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.respond()
 
 if __name__ == "__main__":
+    # Use OLED?
+    oled_active = sys.argv[1]
+
+    #Connect oled type is sh1106
+    if oled_active:
+        serial = i2c(port=1, address=0x3C)
+        device = sh1106(serial)
+
+    server_name = sys.argv[2]
+    server_port = sys.argv[3]
+
     #Set local site (AltAz)
-    location = EarthLocation.of_address(site_address)
+    location = EarthLocation.of_address('Greenwich')
     print("Location %r" % location)
 
     # Start Web server
