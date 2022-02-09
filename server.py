@@ -79,6 +79,17 @@ if oled_active:
 
 # HTTP Server
 class SimpleWebServer(BaseHTTPRequestHandler):
+    def outputDisplay(line1, line2):
+        # Output to OLED
+        if oled_active:
+            with canvas(device) as draw:
+                draw.rectangle(device.bounding_box, outline="white", fill="black")
+                draw.text((3, 10), "--------------------", fill="white")
+                draw.text((3, 20), line1, fill="white")
+                draw.text((3, 30), line2 , fill="white")
+                draw.text((3, 40), "--------------------", fill="white")
+        return
+
     def do_HEAD(self):
         return
 
@@ -93,8 +104,10 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         messier = parse_qs(query).get('messier', None)
         planet = parse_qs(query).get('planet', None)
+        getout = parse_qs(query).get('getout', None)
         print(messier)
         print(planet)
+        print(getout)
 
         # get Coords of Sky Object for a Messier Object
         str = ''
@@ -144,6 +157,10 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                         draw.text((3, 40), "  Scope: = ", fill="white")
                 # Output to HTTP Request
                 str = "Invalid Planet should be %s" % theplanets
+        elif(getout is not None):
+            # Output to OLED
+            outputDisplay("     Star Coords    ", "      Shutdown      ")
+            str = "Shutting down server"
         else:
             # Output to OLED
             if oled_active:
