@@ -62,7 +62,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         return
 
     def handle_http(self, status, content_type):
-        global location
+        global location, oled_active
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
@@ -72,6 +72,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         planet = parse_qs(query).get('planet', None)
         getout = parse_qs(query).get('getout', None)
         myaddress = parse_qs(query).get('address', None)
+        display = parse_qs(query).get('display', None)
 
         # get Coords of Sky Object for a Messier Object
         str = ''
@@ -104,6 +105,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             print("Location %r" % location)
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
+        elif(display is not None):
+            oled_active = display[0]
+            str = "Display active = %s" % oled_active
         elif(getout is not None):
             global server_name, server_port
             outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
@@ -127,15 +131,15 @@ if __name__ == "__main__":
     # Use OLED?
     oled_active = sys.argv[1]
     print(oled_active)
-    
+
     #Connect oled type is sh1106
     if oled_active:
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
 
-    server_name = sys.argv[2]
+    server_name = print("%s.local" % os.uname()[1])
     print(server_name)
-    server_port = int(sys.argv[3])
+    server_port = int(sys.argv[2])
     print(server_port)
 
     #Set local site (AltAz)
