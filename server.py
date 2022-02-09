@@ -137,7 +137,7 @@ if __name__ == "__main__":
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
 
-    server_name = print("%s.local" % os.uname()[1])
+    server_name = "%s.local" % os.uname()[1]
     print(server_name)
     server_port = int(sys.argv[2])
     print(server_port)
