@@ -126,14 +126,17 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     # Use OLED?
     oled_active = sys.argv[1]
-
+    print(oled_active)
+    
     #Connect oled type is sh1106
     if oled_active:
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
 
     server_name = sys.argv[2]
+    print(server_name)
     server_port = int(sys.argv[3])
+    print(server_port)
 
     #Set local site (AltAz)
     location = EarthLocation.of_address('Greenwich')
