@@ -5,6 +5,7 @@ Craig Cmehil - https://github.com/ccmehil
 """
 
 import os
+import argparse
 from pickle import TRUE
 import sys
 import getopt
@@ -128,24 +129,41 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         self.respond()
 
 if __name__ == "__main__":
-    # Use OLED?
-    if(sys.argv is None):
-        oled_active = TRUE
+    # Initialize parser
+    parser = argparse.ArgumentParser()
+    
+    # Adding optional argument
+    parser.add_argument("-s", "--Server", help = "Server")
+    parser.add_argument("-p", "--Port", help = "Port")
+    parser.add_argument("-d", "--Display", help = "OLED")
+
+    # Read arguments from command line
+    args = parser.parse_args()
+
+    # Indicate server or use automatic hostname with .local
+    if args.Server:
+        server_name = args.Server
     else:
-        oled_active = sys.argv[1]
+        server_name = "%s.local" % os.uname()[1]
+
+    # Indicate Port number or use default 8080
+    if args.Port:
+        server_port = args.Port
+    else:
+        server_port = 8080
+
+    # Use OLED?
+    if args.Display:
+        oled_active = args.Display
+    else:
+        oled_active = TRUE
 
     #Connect oled type is sh1106
     if oled_active:
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
-
-    server_name = "%s.local" % os.uname()[1]
-    if(sys.argv is None):
-        server_port = 8080
-    else:
-        server_port = int(sys.argv[2])
-
-    #Set local site (AltAz)
+    
+    #Set local site (AltAz) based on Greenwich
     location = EarthLocation.of_address('Greenwich')
     print("Location %r" % location)
 
