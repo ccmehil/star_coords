@@ -74,9 +74,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         getout = parse_qs(query).get('getout', None)
         myaddress = parse_qs(query).get('address', None)
         display = parse_qs(query).get('display', None)
-        lat = parse_qs(query).get('lat', None)
-        lon = parse_qs(query).get('lon', None)
-        alt = parse_qs(query).get('alt', None)
+        latitude = parse_qs(query).get('lat', None)
+        longitude = parse_qs(query).get('lon', None)
+        altitude = parse_qs(query).get('alt', None)
 
         # get Coords of Sky Object for a Messier Object
         str = ''
@@ -109,9 +109,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             print("Location %r" % location)
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
-        elif(lat is not None and lon is not None and alt is not None):
-            print("Deterimine location from lat: %s lon: %s and alt: %s" % (lat[0], lon[0], alt[0]))
-            location = EarthLocation(lat=int(float(lat[0]))*u.deg, lon=lon[0]*u.deg, height=alt[0]*u.m)
+        elif(latitude is not None and longitude is not None and altitude is not None):
+            print("Deterimine location from lat: %s lon: %s and alt: %s" % (latitude[0], longitude[0], altitude[0]))
+            location = EarthLocation(lat=int(float(latitude[0]))*u.deg, lon=longitude[0]*u.deg, height=altitude[0]*u.m)
             print("Location %r" % location)
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
