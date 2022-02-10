@@ -111,7 +111,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             str = "Your Latitude and Longitude have now been updated"
         elif(latitude is not None and longitude is not None and altitude is not None):
             print("Deterimine location from lat: %s lon: %s and alt: %s" % (latitude[0], longitude[0], altitude[0]))
-            location = EarthLocation(lat=latitude[0]*u.deg, lon=longitude[0]*u.deg, height=altitude[0]*u.m)
+            location = EarthLocation(lat=int(latitude[0])*u.deg, lon=int(longitude[0])*u.deg) #, height=altitude[0]*u.m)
             print("Location %r" % location)
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
