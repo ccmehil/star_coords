@@ -13,7 +13,7 @@ Your first request should be to set your location. This can be your specific str
 
 > http://10.0.0.1:8080?address=Greenwich
 
-You can also use specific Latitude, Longitude and Altitude to set your location.
+You can also use specific Latitude, Longitude and Altitude to set your location, for example with this [Apple Shortcut](https://www.icloud.com/shortcuts/9034da0e573f4ca7b60f4f4a5cf610d6)
 
 > http://10.0.0.1:8080?lat=51.1&lon=1&alt=32
 
