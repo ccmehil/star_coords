@@ -60,7 +60,7 @@ sudo nano /etc/profile
 Scroll to the bottom and add the following line
 
 ```
-sudo python /home/pi/star_coords/server.py
+sudo python /home/pi/star_coords/server.py -d TRUE -s 10.0.0.1 -p 8080
 ```
 
 This will start the server on boot/reboot.
