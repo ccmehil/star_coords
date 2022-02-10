@@ -74,6 +74,8 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         getout = parse_qs(query).get('getout', None)
         myaddress = parse_qs(query).get('address', None)
         display = parse_qs(query).get('display', None)
+        lat = parse_qs(query).get('lat', None)
+        lon = parse_qs(query).get('lon', None)
 
         # get Coords of Sky Object for a Messier Object
         str = ''
@@ -104,6 +106,11 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         elif(myaddress is not None):
             location = EarthLocation.of_address(myaddress[0])
             print("Location %r" % location)
+            outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
+            str = "Your Latitude and Longitude have now been updated"
+        elif(lat is not None and lon is not None):
+            #location = EarthLocation.of_address(myaddress[0])
+            #print("Location %r" % location)
             outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
             str = "Your Latitude and Longitude have now been updated"
         elif(display is not None):
