@@ -29,7 +29,7 @@ The parameter "messier=XXX" is a object from the [Messier Catalog](https://en.wi
 
 If you are an Apple user you can use this [Apple Shortcut](https://www.icloud.com/shortcuts/ba09a1a658c7462484d6e64e5392c1a3) I made to interact with the server while star gazing. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
-![Notifications from the Shortcut](docs/IMG_0933.jpg "Notifications")
+![Notifications from the Shortcut](IMG_0933.jpg "Notifications")
 
 With the current version you can also search for a planet. This is an either or type of search either a Messier Object or a Planet, not both.
 
@@ -37,7 +37,7 @@ With the current version you can also search for a planet. This is an either or 
 
 Another [Apple Shortcut](https://www.icloud.com/shortcuts/8eb5d1e27f044187959cbe59aadaaea7) I made is to interact with the server while looking for a planet. Siri will even react via voice input over your Apple Watch or by asking "Hey Siri"
 
-![Notifications from the Shortcut](docs/IMG_PLANET_NOT.jpeg "Notifications")
+![Notifications from the Shortcut](IMG_PLANET_NOT.jpeg "Notifications")
 
 To stop the server once it is running you will need to make an HTTP request.
 
