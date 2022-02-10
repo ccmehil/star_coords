@@ -13,6 +13,10 @@ Your first request should be to set your location. This can be your specific str
 
 > http://10.0.0.1:8080?address=Greenwich
 
+You can also use specific Latitude, Longitude and Altitude to set your location.
+
+> http://10.0.0.1:8080?lat=51.1&lon=1&alt=32
+
 You can also deactivate or activate the OLED display from a HTTP call as well.
 
 > http://10.0.0.1:8080?display=TRUE
