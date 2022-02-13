@@ -26,9 +26,7 @@ If Not you can follow some simple [instructions](https://raspberrytips.com/insta
 
 ```
 sudo apt-get install git python3-pip libatlas3-base libopenjp2-7 i2c-tools
-sudo pip3 install luma.oled
-sudo pip3 install astropy
-sudo pip3 install numpy
+pip3 install luma.oled astropy numpy
 cd /home/pi/
 git clone https://github.com/ccmehil/star_coords.git
 ```
