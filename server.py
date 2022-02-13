@@ -72,7 +72,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         cmd = parse_qs(query).get('cmd', None)
 
-        if (cmd[0] == "messier"):
+        if (cmd[0] == 'messier'):
                 obj = parse_qs(query).get('object', None)
                 if (obj is not None):
                     skyobject = SkyCoord.from_name(obj[0].upper())
@@ -84,7 +84,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 else:
                     outputDisplay("   Star Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
                     str = "Invalid Object"
-        elif(cmd[0] == "planet"):
+        elif(cmd[0] == 'planet'):
                 obj = parse_qs(query).get('object', None)
                 if (obj is not None and obj[0].lower() in theplanets):
                     now = dt.utcnow()
@@ -99,7 +99,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 else:
                     outputDisplay("  Planet Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
                     str = "Invalid Planet should be %s" % theplanets
-        elif(cmd[0] == "address"):
+        elif(cmd[0] == 'address'):
                 address = parse_qs(query).get('address', None)
                 if(address is not None):
                     location = EarthLocation.of_address(address[0])
@@ -109,7 +109,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 else:
                     outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
                     str = "Invalid Address"
-        elif(cmd[0] == "coordinates"):
+        elif(cmd[0] == 'coordinates'):
                 latitude = parse_qs(query).get('lat', None)
                 longitude = parse_qs(query).get('lon', None)
                 altitude = parse_qs(query).get('alt', None)
@@ -122,14 +122,14 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                 else:
                     outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
                     str = "Invalid Latitude and Longitude"
-        elif(cmd[0] == "display"):
+        elif(cmd[0] == 'display'):
                 display = parse_qs(query).get('value', None)
                 if(display is not None):
                     oled_active = display[0]
                     str = "Display active = %s" % oled_active
                 else:
                     str = "Invalid Value"
-        elif(cmd[0] == "exit"):
+        elif(cmd[0] == 'exit'):
                 global server_name, server_port
                 outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
                 sleep(10)
