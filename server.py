@@ -189,6 +189,7 @@ if __name__ == "__main__":
     # Start Web server
     httpd = HTTPServer((server_name, int(server_port)), SimpleWebServer)
     print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
+    outputDisplay("--------------------", "     Star Coords    ", "      Startup       ", "--------------------", "")
 
     try:
         httpd.serve_forever()
