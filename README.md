@@ -12,9 +12,7 @@ My understanding is the the Alt is a degree point ona 360 degree circle where 0 
 - [numpy](https://pypi.org/project/mumpy/)
 - [astropy](https://www.astropy.org)
 
-```
-python --version
-```
+Also be sure that you have enabled GPIO and I2C using ```sudo raspi-config``` if you intend to use an OLED display.
 
 If Not you can follow some simple [instructions](https://raspberrytips.com/install-latest-python-raspberry-pi/) to update your Raspberry Pi.
 
