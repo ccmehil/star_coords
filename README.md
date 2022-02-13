@@ -8,13 +8,9 @@ My understanding is the the Alt is a degree point ona 360 degree circle where 0 
 
 # Dependencies
 
-The whole thing has been written using **Python 3.10+**
-
 - [luma.oled](https://pypi.org/project/luma.oled/)
 - [numpy](https://pypi.org/project/mumpy/)
 - [astropy](https://www.astropy.org)
-
-Double check to make sure you are running **Python 3.10+**
 
 ```
 python --version
