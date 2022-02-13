@@ -14,6 +14,13 @@ The whole thing has been written using **Python 3.10+**
 - [numpy](https://pypi.org/project/mumpy/)
 - [astropy](https://www.astropy.org)
 
+Double check to make sure you are running **Python 3.10+**
+
+```
+python --version
+```
+
+If Not you can follow some simple [instructions](https://raspberrytips.com/install-latest-python-raspberry-pi/) to update your Raspberry Pi.
 
 # Install
 

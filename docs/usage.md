@@ -39,10 +39,6 @@ You can also deactivate or activate the OLED display from a HTTP call as well.
 
 > http://10.0.0.1:8080?cmd=display&value=TRUE
 
-or you can change the text color to ```red````
-
-> http://10.0.0.1:8080?cmd=display&color=red
-
 ## 
 
 Otherwise you can use either the ```messier``` or the ```planet``` parameters to search for your object based on your current location.
