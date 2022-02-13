@@ -41,7 +41,7 @@ You can also deactivate or activate the OLED display from a HTTP call as well.
 
 or you can change the text color to ```red````
 
-> http://10.0.0.1:8080?cmd=display&value=RED
+> http://10.0.0.1:8080?cmd=display&color=red
 
 ## 
 

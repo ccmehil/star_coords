@@ -43,15 +43,16 @@ print("******************************************************")
 theplanets = ['sun',  'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']
 
 def outputDisplay(line1, line2, line3, line4, line5):
+    global oled_color
     # Output to OLED
     if oled_active:
         with canvas(device) as draw:
-            draw.rectangle(device.bounding_box, outline="white", fill="black")
-            draw.text((3, 10), line1, fill="white")
-            draw.text((3, 20), line2, fill="white")
-            draw.text((3, 30), line3, fill="white")
-            draw.text((3, 40), line4, fill="white")
-            draw.text((3, 50), line5, fill="white")
+            draw.rectangle(device.bounding_box, outline=oled_color", fill="black")
+            draw.text((3, 10), line1, fill=oled_color)
+            draw.text((3, 20), line2, fill=oled_color)
+            draw.text((3, 30), line3, fill=oled_color)
+            draw.text((3, 40), line4, fill=oled_color)
+            draw.text((3, 50), line5, fill=oled_color)
     return
 
 # HTTP Server
@@ -63,7 +64,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         return
 
     def handle_http(self, status, content_type):
-        global location, oled_active
+        global location, oled_active, oled_color
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
@@ -124,6 +125,15 @@ class SimpleWebServer(BaseHTTPRequestHandler):
                     str = "Invalid Latitude and Longitude"
             case "display":
                 display = parse_qs(query).get('value', None)
+                color = parse_qs(query).get('color', None)
+                if(color is not None):
+                    oled_color = color[0].lower()
+                    str = "Color set to %s" % color[0].lower()
+                    break
+                else:
+                    oled_color = 'white'
+                    str = "Color set to white"
+                    break
                 if(display is not None):
                     oled_active = display[0]
                     str = "Display active = %s" % oled_active
@@ -181,7 +191,9 @@ if __name__ == "__main__":
     if oled_active:
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
-    
+    # Default color for OLED
+    oled_color = 'white'
+
     #Set local site (AltAz) based on Greenwich
     location = EarthLocation.of_address('Greenwich')
     print("Location %r" % location)
