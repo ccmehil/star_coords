@@ -20,7 +20,7 @@ If Not you can follow some simple [instructions](https://raspberrytips.com/insta
 
 ```
 sudo apt-get install git python3-pip libatlas3-base libopenjp2-7 i2c-tools
-pip3 install luma.oled astropy numpy
+sudo pip3 install luma.oled astropy numpy
 cd /home/pi/
 git clone https://github.com/ccmehil/star_coords.git
 ```
@@ -45,7 +45,7 @@ If you are getting odd errors related to ```numpy``` you may need to do the foll
 ```
 pip3 uninstall numpy
 sudo apt-get remove python3-numpy
-pip3 install numpy
+sudo pip3 install numpy
 ```
 
 # OPTIONAL (not tested)
