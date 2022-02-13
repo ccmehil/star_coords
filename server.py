@@ -47,7 +47,7 @@ def outputDisplay(line1, line2, line3, line4, line5):
     # Output to OLED
     if oled_active:
         with canvas(device) as draw:
-            draw.rectangle(device.bounding_box, outline=oled_color", fill="black")
+            draw.rectangle(device.bounding_box, outline=oled_color, fill="black")
             draw.text((3, 10), line1, fill=oled_color)
             draw.text((3, 20), line2, fill=oled_color)
             draw.text((3, 30), line3, fill=oled_color)
@@ -127,19 +127,17 @@ class SimpleWebServer(BaseHTTPRequestHandler):
             case "display":
                 display = parse_qs(query).get('value', None)
                 color = parse_qs(query).get('color', None)
-                if(color is not None):
-                    oled_color = color[0].lower()
-                    str = "Color set to %s" % color[0].lower()
-                    break
-                else:
-                    oled_color = 'white'
-                    str = "Color set to white"
-                    break
                 if(display is not None):
                     oled_active = display[0]
                     str = "Display active = %s" % oled_active
                 else:
                     str = "Invalid Value"
+                if(color is not None):
+                    oled_color = color[0].lower()
+                    str = "Color set to %s" % color[0].lower()
+                else:
+                    oled_color = 'white'
+                    str = "Color set to white"
             case "exit":
                 global server_name, server_port
                 outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
