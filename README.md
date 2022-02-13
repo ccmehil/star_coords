@@ -45,7 +45,7 @@ If you are getting odd errors related to ```numpy``` you may need to do the foll
 ```
 pip3 uninstall numpy
 sudo apt-get remove python3-numpy
-sudo pip3 install numpy
+pip3 install numpy
 ```
 
 # OPTIONAL (not tested)
