@@ -70,7 +70,8 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 
         query = urlparse(self.path).query
         cmd = parse_qs(query).get('cmd', None)
-
+        print(cmd)
+        
         match cmd:
             case "messier":
                 obj = parse_qs(query).get('object', None)
