@@ -46,7 +46,7 @@ def outputDisplay(line1, line2, line3, line4, line5):
     global oled_color
     # Output to OLED
     if oled_active:
-        with canvas(device) as draw:
+        with canvas(device, dither=True) as draw:
             draw.rectangle(device.bounding_box, outline=oled_color, fill="black")
             draw.text((3, 10), line1, fill=oled_color)
             draw.text((3, 20), line2, fill=oled_color)
