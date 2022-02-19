@@ -149,7 +149,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         global history
         content = self.handle_http(200, 'text/html')
         print(content)
-        history = content + '<br>'
+        history = history + '<br>' + content
         print(history)
 
         # Now get HTML to surround output
