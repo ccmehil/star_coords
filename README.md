@@ -31,7 +31,7 @@ To determine the address for your OLED screen
 
 ```sudo i2cdetect -y 1```
 
-You will need to possibly modify ```server.py``` lines: 182-183
+You will need to possibly modify ```server.py``` lines: 2080-209
 
 ```
 serial = i2c(port=1, address=0x3C)
