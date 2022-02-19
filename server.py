@@ -156,7 +156,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         with open('web/footer.html', 'r') as file:
             footer = file.read().replace('\n', '')
 
-        html = header + str(content) + '</p></div><div class="column"><p>' + history + footer
+        html = header + content + bytes("</p></div><div class='column'><p>", "UTF-8") + bytes(history, "UTF-8") + footer
         self.wfile.write(html)
 
     def do_GET(self):        
