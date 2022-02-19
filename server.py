@@ -213,7 +213,7 @@ if __name__ == "__main__":
     print("Location %r" % location)
 
     # Set history to blank
-    history = ''
+    history = 'Server Startup'
 
     # Start Web server
     httpd = HTTPServer((server_name, int(server_port)), SimpleWebServer)
