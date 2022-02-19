@@ -147,15 +147,15 @@ class SimpleWebServer(BaseHTTPRequestHandler):
     def respond(self):
         global history
         content = self.handle_http(200, 'text/html')
-        history = content + '<br>'
+        history = str(content) + '<br>'
 
         # Now get HTML to surround output
-        with open('header.html', 'r') as file:
+        with open('web/header.html', 'r') as file:
             header = file.read().replace('\n', '')
 
-        with open('footer.html', 'r') as file:
+        with open('web/footer.html', 'r') as file:
             footer = file.read().replace('\n', '')
-        content = header + '<div class="column" style="background-color:#aaa;"><p>' + content + '</p></div><div class="column" style="background-color:#bbb;"><p>' + history + '</p></div>' + footer
+        content = header + '<div class="column" style="background-color:#aaa;"><p>' + str(content) + '</p></div><div class="column" style="background-color:#bbb;"><p>' + history + '</p></div>' + footer
         self.wfile.write(content)
 
     def do_GET(self):        
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
     # Set history to blank
     history = ''
-    
+
     # Start Web server
     httpd = HTTPServer((server_name, int(server_port)), SimpleWebServer)
     print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
