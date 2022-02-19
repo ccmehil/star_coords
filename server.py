@@ -142,6 +142,14 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         
     def respond(self):
         content = self.handle_http(200, 'text/html')
+        # Now get HTML to surround output
+        with open('header.txt', 'r') as file:
+            header = file.read().replace('\n', '')
+
+        with open('footer.txt', 'r') as file:
+            footer = file.read().replace('\n', '')
+
+        content = header + content + footer
         self.wfile.write(content)   
 
     def do_GET(self):        
