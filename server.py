@@ -179,7 +179,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         with open('web/col2_e.html', 'r') as file:
             col2_footer = file.read().replace('\n', '')
 
-        html = header + col1_header + content + col1_footer + col1_header + history + col1_footer + footer
+        html = header + col1_header + content + col1_footer + col2_header + history + col2_footer + footer
         self.wfile.write(bytes(html, "UTF-8"))
 
     def do_GET(self):        
