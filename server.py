@@ -72,69 +72,73 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         query = urlparse(self.path).query
         cmd = parse_qs(query).get('cmd', None)
 
-        if (cmd[0] == 'messier'):
-                obj = parse_qs(query).get('object', None)
-                if (obj is not None):
-                    skyobject = SkyCoord.from_name(obj[0].upper())
-                    skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
-                    az = skyobjectaltaz.az.to_string()
-                    alt = skyobjectaltaz.alt.to_string()
-                    outputDisplay("  Star Coords - %s  " % obj[0].upper(), "--------------------",  "   Base: = %s" % az.rpartition('d')[0], "  Scope: = %s" % alt.rpartition('d')[0], "")
-                    str = "%s: Base: = %s Scope: = %s" % (obj[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])
-                else:
-                    outputDisplay("   Star Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
-                    str = "Invalid Object"
-        elif(cmd[0] == 'planet'):
-                obj = parse_qs(query).get('object', None)
-                if (obj is not None and obj[0].lower() in theplanets):
-                    now = dt.utcnow()
-                    dt_string = dt_string = now.strftime("%Y-%m-%d %H:%M")
-                    t = Time(dt_string)
-                    with solar_system_ephemeris.set('builtin'):
-                        planetlocation = get_body(obj[0].lower(), t, location) 
-                    ra = planetlocation.ra.to_string()
-                    dec = planetlocation.dec.to_string()
-                    outputDisplay("  Planet Coords   ", "  %s                " % obj[0].upper(), "--------------------", "   Base: = %s" % ra.rpartition('d')[0],  "  Scope: = %s" % dec.rpartition('d')[0])
-                    str = "%s: Base: = %s Scope: = %s" % (obj[0].upper(), ra.rpartition('d')[0],  dec.rpartition('d')[0])
-                else:
-                    outputDisplay("  Planet Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
-                    str = "Invalid Planet should be %s" % theplanets
-        elif(cmd[0] == 'address'):
-                address = parse_qs(query).get('address', None)
-                if(address is not None):
-                    location = EarthLocation.of_address(address[0])
-                    print("Location %r" % location)
-                    outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
-                    str = "Your address has now been updated"
-                else:
-                    outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
-                    str = "Invalid Address"
-        elif(cmd[0] == 'coordinates'):
-                latitude = parse_qs(query).get('lat', None)
-                longitude = parse_qs(query).get('lon', None)
-                altitude = parse_qs(query).get('alt', None)
-                if(latitude is not None and longitude is not None and altitude is not None):
-                    print("Deterimine location from lat: %s lon: %s and alt: %s" % (latitude[0], longitude[0], altitude[0]))
-                    location = EarthLocation(lat=int(float(latitude[0]))*u.deg, lon=int(float(longitude[0]))*u.deg, height=int(float(altitude[0]))*u.m)
-                    print("Location %r" % location)
-                    outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
-                    str = "Your Latitude and Longitude have now been updated"
-                else:
-                    outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
-                    str = "Invalid Latitude and Longitude"
-        elif(cmd[0] == 'display'):
-                display = parse_qs(query).get('value', None)
-                if(display is not None):
-                    oled_active = display[0]
-                    str = "Display active = %s" % oled_active
-                else:
-                    str = "Invalid Value"
-        elif(cmd[0] == 'exit'):
-                global server_name, server_port
-                outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
-                sleep(10)
-                print(time.asctime(), 'Server DOWN - %s:%s' % (server_name, server_port))
-                sys.exit()
+        if(cmd is not None):
+            if (cmd[0] == 'messier'):
+                    obj = parse_qs(query).get('object', None)
+                    if (obj is not None):
+                        skyobject = SkyCoord.from_name(obj[0].upper())
+                        skyobjectaltaz = skyobject.transform_to(AltAz(obstime=dt.utcnow(),location=location))
+                        az = skyobjectaltaz.az.to_string()
+                        alt = skyobjectaltaz.alt.to_string()
+                        outputDisplay("  Star Coords - %s  " % obj[0].upper(), "--------------------",  "   Base: = %s" % az.rpartition('d')[0], "  Scope: = %s" % alt.rpartition('d')[0], "")
+                        str = "%s: Base: = %s Scope: = %s" % (obj[0].upper(), az.rpartition('d')[0],  alt.rpartition('d')[0])
+                    else:
+                        outputDisplay("   Star Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
+                        str = "Invalid Object"
+            elif(cmd[0] == 'planet'):
+                    obj = parse_qs(query).get('object', None)
+                    if (obj is not None and obj[0].lower() in theplanets):
+                        now = dt.utcnow()
+                        dt_string = dt_string = now.strftime("%Y-%m-%d %H:%M")
+                        t = Time(dt_string)
+                        with solar_system_ephemeris.set('builtin'):
+                            planetlocation = get_body(obj[0].lower(), t, location) 
+                        ra = planetlocation.ra.to_string()
+                        dec = planetlocation.dec.to_string()
+                        outputDisplay("  Planet Coords   ", "  %s                " % obj[0].upper(), "--------------------", "   Base: = %s" % ra.rpartition('d')[0],  "  Scope: = %s" % dec.rpartition('d')[0])
+                        str = "%s: Base: = %s Scope: = %s" % (obj[0].upper(), ra.rpartition('d')[0],  dec.rpartition('d')[0])
+                    else:
+                        outputDisplay("  Planet Coords   ", "--------------------", "   Base: = ", "  Scope: = ", "")
+                        str = "Invalid Planet should be %s" % theplanets
+            elif(cmd[0] == 'address'):
+                    address = parse_qs(query).get('address', None)
+                    if(address is not None):
+                        location = EarthLocation.of_address(address[0])
+                        print("Location %r" % location)
+                        outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
+                        str = "Your address has now been updated"
+                    else:
+                        outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
+                        str = "Invalid Address"
+            elif(cmd[0] == 'coordinates'):
+                    latitude = parse_qs(query).get('lat', None)
+                    longitude = parse_qs(query).get('lon', None)
+                    altitude = parse_qs(query).get('alt', None)
+                    if(latitude is not None and longitude is not None and altitude is not None):
+                        print("Deterimine location from lat: %s lon: %s and alt: %s" % (latitude[0], longitude[0], altitude[0]))
+                        location = EarthLocation(lat=int(float(latitude[0]))*u.deg, lon=int(float(longitude[0]))*u.deg, height=int(float(altitude[0]))*u.m)
+                        print("Location %r" % location)
+                        outputDisplay("--------------------", "     Star Coords    ", " Latitude/Longitude ", "--------------------", "")
+                        str = "Your Latitude and Longitude have now been updated"
+                    else:
+                        outputDisplay("--------------------", "     Star Coords    ", "       Invalid      ", "--------------------", "")
+                        str = "Invalid Latitude and Longitude"
+            elif(cmd[0] == 'display'):
+                    display = parse_qs(query).get('value', None)
+                    if(display is not None):
+                        oled_active = display[0]
+                        str = "Display active = %s" % oled_active
+                    else:
+                        str = "Invalid Value"
+            elif(cmd[0] == 'exit'):
+                    global server_name, server_port
+                    outputDisplay("--------------------", "     Star Coords    ", "      Shutdown      ", "--------------------", "")
+                    sleep(10)
+                    print(time.asctime(), 'Server DOWN - %s:%s' % (server_name, server_port))
+                    sys.exit()
+            else:
+                    outputDisplay("--------------------", "     Star Coords    ", "    Planet Coords   ", "--------------------", "")
+                    str = "Invalid command" 
         else:
                 outputDisplay("--------------------", "     Star Coords    ", "    Planet Coords   ", "--------------------", "")
                 str = "Invalid command" 
