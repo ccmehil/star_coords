@@ -200,6 +200,9 @@ if __name__ == "__main__":
     location = EarthLocation.of_address('Greenwich')
     print("Location %r" % location)
 
+    # Set history to blank
+    history = ''
+    
     # Start Web server
     httpd = HTTPServer((server_name, int(server_port)), SimpleWebServer)
     print(time.asctime(), 'Star Coords Server UP - %s:%s' % (server_name, server_port))
