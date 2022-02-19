@@ -147,8 +147,9 @@ class SimpleWebServer(BaseHTTPRequestHandler):
     def respond(self):
         global history
         content = self.handle_http(200, 'text/html')
+        print(content)
         history = str(content) + '\n'
-
+        print(history)
         # Now get HTML to surround output
         with open('web/header.html', 'r') as file:
             header = file.read().replace('\n', '')
@@ -156,8 +157,8 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         with open('web/footer.html', 'r') as file:
             footer = file.read().replace('\n', '')
 
-        html = header + content + bytes("</p></div><div class='column'><p>", "UTF-8") + bytes(history, "UTF-8") + footer
-        self.wfile.write(html)
+        html = header + str(content) + "</p></div><div class='column'><p>" + history + footer
+        self.wfile.write(bytes(html, "UTF-8"))
 
     def do_GET(self):        
         self.respond()
