@@ -57,7 +57,7 @@ To stop the server once it is running you will need to make an HTTP request.
 
 ## API or Serverless style usage
 
-In order to get a simple response without the HTML formatting from the server you will need to use the ´´´&api=TRUE``` parameter.
+In order to get a simple response without the HTML formatting from the server you will need to use the ```&api=TRUE``` parameter.
 
 For example to set the location it would be
 
