@@ -64,7 +64,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         return
 
     def handle_http(self, status, content_type):
-        global location, oled_active, history
+        global location, oled_active, history, api_call
         self.send_response(status)
         self.send_header('Content-type', content_type)
         self.end_headers()
@@ -73,7 +73,6 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         cmd = parse_qs(query).get('cmd', None)
         apicall = parse_qs(query).get('api', None)
 
-        api_call = FALSE
         if(apicall is not None):
             api_call = apicall[0]
         else:
@@ -164,7 +163,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         return str
 
     def respond(self):
-        global history
+        global history, api_call
         content = self.handle_http(200, 'text/html')
 
         # Now get HTML to surround output
@@ -229,6 +228,9 @@ if __name__ == "__main__":
     if oled_active:
         serial = i2c(port=1, address=0x3C)
         device = sh1106(serial)
+
+    # Set API request to FALSE
+    api_call = FALSE
 
     #Set local site (AltAz) based on Greenwich
     location = EarthLocation.of_address('Greenwich')
