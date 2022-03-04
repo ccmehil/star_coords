@@ -71,6 +71,12 @@ class SimpleWebServer(BaseHTTPRequestHandler):
 
         query = urlparse(self.path).query
         cmd = parse_qs(query).get('cmd', None)
+        apicall = parse_qs(query).get('api', None)
+
+        if(apicall is not None):
+            api_call = apicall[0]
+        else:
+            api_call = FALSE
 
         if(cmd is not None):
             if (cmd[0] == 'messier'):
@@ -179,7 +185,10 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         with open('web/col2_e.html', 'r') as file:
             col2_footer = file.read().replace('\n', '')
 
-        html = header + col1_header + content + col1_footer + col2_header + history + col2_footer + footer
+        if (api_call == FALSE):
+            html = header + col1_header + content + col1_footer + col2_header + history + col2_footer + footer
+        else:
+            html = content
         self.wfile.write(bytes(html, "UTF-8"))
 
     def do_GET(self):        
