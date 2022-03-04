@@ -73,6 +73,7 @@ class SimpleWebServer(BaseHTTPRequestHandler):
         cmd = parse_qs(query).get('cmd', None)
         apicall = parse_qs(query).get('api', None)
 
+        api_call = FALSE
         if(apicall is not None):
             api_call = apicall[0]
         else:
